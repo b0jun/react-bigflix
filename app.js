@@ -2,9 +2,11 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
+import authRoutes from './routes/api/auth';
 import config from './config';
 
 const app = express();
@@ -15,6 +17,8 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: true, credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 mongoose
   .connect(MONGO_URI, {
@@ -29,6 +33,8 @@ mongoose
 app.get('/', (req, res) => {
   res.send('Success');
 });
+
+app.use('/api/auth', authRoutes);
 
 const port = PORT || 4000;
 app.listen(port, () => {
