@@ -7,7 +7,9 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 
 import authRoutes from './routes/api/auth';
+import mylistRoutes from './routes/api/mylist';
 import config from './config';
+import isLoggenIn from './middleware/isLoggedIn';
 
 const app = express();
 const { PORT, MONGO_URI } = config;
@@ -35,7 +37,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
-
+app.use('/api/mylist', isLoggenIn, mylistRoutes);
 const port = PORT || 4000;
 app.listen(port, () => {
   console.log('Listening to port: %d', port);
