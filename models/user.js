@@ -27,6 +27,12 @@ UserSchema.methods.setPassword = async function (password) {
   this.password = hashedPassword;
 };
 
+//입력한 비밀번호가 해당 계정의 비밀번호와 일치 여부
+UserSchema.methods.checkPassword = async function (password) {
+  const result = await bcrypt.compare(password, this.password);
+  return result; // boolean
+};
+
 UserSchema.methods.serialize = function () {
   const data = this.toJSON(); //응답할 Data에서 hashedPassword 필드 제거
   delete data.password;

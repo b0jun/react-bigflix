@@ -3,7 +3,7 @@ import config from '../config';
 
 const { JWT_SECRET } = config;
 
-const jwtMiddleware = (req, res, next) => {
+const jwtMiddleware = async (req, res, next) => {
   const token = req.cookies.access_token;
   if (!token) {
     return res.status(401).send('토큰이 없습니다.');
@@ -14,6 +14,16 @@ const jwtMiddleware = (req, res, next) => {
       _id: decoded._id,
       email: decoded.email,
     };
+
+    const now = Math.floor(Date.now() / 1000);
+    if (decoded.exp - now < 60 * 60 * 24 * 3.5) {
+      const user = await User.findByEmail(decoded._id);
+      const token = user.generateToken();
+      res.cookie('access_token', token, {
+        maxAge: 1000 * 60 * 60 * 24 * 7, //7d
+        httpOnly: true,
+      });
+    }
     return next();
   } catch (err) {
     console.error(err);
