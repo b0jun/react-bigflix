@@ -75,6 +75,6 @@ router.get('/check', jwtMiddleware, (req, res, next) => {
 // POST /api/auth/logout
 router.post('/logout', (req, res) => {
   res.clearCookie('access_token');
-  res.status(204);
+  res.status(204).send('Logout Success');
 });
 export default router;
