@@ -4,16 +4,19 @@ export const SearchTabBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.3rem 0.5rem;
   transition: all 0.5s ease-in-out;
   ${(props) =>
-    props.isOpen &&
-    css`
-      & {
-        border: 1px solid white;
-        background: rgba(12, 12, 12, 0.3);
-      }
-    `}
+    props.isOpen
+      ? css`
+          & {
+            border: 1px solid white;
+            background: rgba(12, 12, 12, 0.3);
+          }
+        `
+      : css`
+          padding: 0;
+        `}
 `;
 
 export const SearchInput = styled.input`
@@ -22,12 +25,16 @@ export const SearchInput = styled.input`
   outline: none;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
-  width: ${(props) => (props.isOpen ? '12rem' : '0')};
+  width: ${(props) => (props.isOpen ? '9rem' : '0')};
   transition: all 0.5s ease-in-out;
   ${(props) =>
     props.isOpen
       ? css`
           margin-left: 0.8rem;
+          @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+            width: 7rem;
+            font-size: 0.8rem;
+          }
         `
       : css`
           margin-left: 0;
@@ -35,15 +42,27 @@ export const SearchInput = styled.input`
 `;
 
 export const ClearText = styled.div`
+  position: relative;
+  border-radius: 6px;
+  cursor: pointer;
   ${(props) =>
     props.isOpen
       ? css`
-          width: 30px;
-          height: 30px;
+          width: 28px;
+          height: 28px;
           &:before,
           &:after {
-            width: 26px;
-            height: 4px;
+            width: 24px;
+            height: 3px;
+          }
+          @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+            width: 25px;
+            height: 25px;
+            &:before,
+            &:after {
+              width: 21px;
+              height: 3px;
+            }
           }
         `
       : css`
@@ -55,9 +74,6 @@ export const ClearText = styled.div`
             height: 0px;
           }
         `}
-  position: relative;
-  border-radius: 6px;
-  cursor: pointer;
   &:before,
   &:after {
     content: '';
@@ -65,7 +81,10 @@ export const ClearText = styled.div`
     transition: width 1s ease-in-out;
     background-color: white;
     border-radius: 2px;
-    top: 14px;
+    top: 13px;
+    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+      top: 11px;
+    }
   }
   &:before {
     -webkit-transform: rotate(45deg);
