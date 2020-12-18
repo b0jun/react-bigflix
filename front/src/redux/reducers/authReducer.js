@@ -25,7 +25,7 @@ export const clearError = () => ({
   type: CLEAR_ERROR,
 });
 
-// 새로 고침 시 localStorage을 불러 임시 로그인
+// 새로 고침 시 localStorage을 불러 임시 로그인 유지
 export const tempSetUser = (userInfo) => ({
   type: TEMP_SET_USER,
   userInfo,

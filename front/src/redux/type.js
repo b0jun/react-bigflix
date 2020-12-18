@@ -1,3 +1,4 @@
+// Auth Type
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -17,3 +18,16 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 export const TEMP_SET_USER = 'TEMP_SET_USER';
+
+// Contents Type
+export const LOAD_HOME_REQUEST = 'LOAD_HOME_REQUEST';
+export const LOAD_HOME_SUCCESS = 'LOAD_HOME_SUCCESS';
+export const LOAD_HOME_FAILURE = 'LOAD_HOME_FAILURE';
+
+export const LOAD_TV_REQUEST = 'LOAD_TV_REQUEST';
+export const LOAD_TV_SUCCESS = 'LOAD_TV_SUCCESS';
+export const LOAD_TV_FAILURE = 'LOAD_TV_FAILURE';
+
+export const LOAD_MOVIE_REQUEST = 'LOAD_MOVIE_REQUEST';
+export const LOAD_MOVIE_SUCCESS = 'LOAD_MOVIE_SUCCESS';
+export const LOAD_MOVIE_FAILURE = 'LOAD_MOVIE_FAILURE';
