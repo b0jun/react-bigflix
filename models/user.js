@@ -36,6 +36,7 @@ UserSchema.methods.checkPassword = async function (password) {
 UserSchema.methods.serialize = function () {
   const data = this.toJSON(); //응답할 Data에서 hashedPassword 필드 제거
   delete data.password;
+  delete data.__v;
   return data;
 };
 
