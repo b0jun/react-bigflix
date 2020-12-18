@@ -26,9 +26,11 @@ const Header = ({ location: { pathname } }) => {
           <MenuItem className="left" current={pathname === '/movie'}>
             <Link to="/movie">영화</Link>
           </MenuItem>
-          <MenuItem className="left" current={pathname === '/mylist'}>
-            <Link to="/mylist">내가 찜한 콘텐츠</Link>
-          </MenuItem>
+          {userInfo && (
+            <MenuItem className="left" current={pathname === '/mylist'}>
+              <Link to="/mylist">내가 찜한 콘텐츠</Link>
+            </MenuItem>
+          )}
         </Menu>
         <RightMenu>
           <MenuItem>
