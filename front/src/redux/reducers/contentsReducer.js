@@ -14,7 +14,7 @@ const initialState = {
   isLoading: false,
   homeResults: {},
   tvResults: {},
-  movieResutls: {},
+  movieResults: {},
   contentsError: null,
 };
 
@@ -26,9 +26,24 @@ const contentsReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case LOAD_HOME_SUCCESS:
+      const {
+        airingTodayTV,
+        popularMovie,
+        popularTV,
+        topRatedMovie,
+        topRatedTV,
+      } = action.payload;
       return {
         ...state,
         isLoading: false,
+        homeResults: {
+          ...state.homeResults,
+          airingTodayTV,
+          popularMovie,
+          popularTV,
+          topRatedMovie,
+          topRatedTV,
+        },
       };
     case LOAD_HOME_FAILURE:
       return {
@@ -41,9 +56,15 @@ const contentsReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case LOAD_TV_SUCCESS:
+      const { tvTrendingDay, tvTrendingWeek } = action.payload;
       return {
         ...state,
         isLoading: false,
+        tvResults: {
+          ...state.tvResults,
+          tvTrendingDay,
+          tvTrendingWeek,
+        },
       };
     case LOAD_TV_FAILURE:
       return {
@@ -56,9 +77,15 @@ const contentsReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case LOAD_MOVIE_SUCCESS:
+      const { movieTrendingDay, movieTrendingWeek } = action.payload;
       return {
         ...state,
         isLoading: false,
+        movieResults: {
+          ...state.movieResults,
+          movieTrendingDay,
+          movieTrendingWeek,
+        },
       };
     case LOAD_MOVIE_FAILURE:
       return {

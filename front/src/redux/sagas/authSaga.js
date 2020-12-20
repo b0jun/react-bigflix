@@ -15,6 +15,8 @@ import {
   LOGOUT_FAILURE,
 } from '../type';
 
+axios.defaults.baseURL = process.env.REACT_APP_BASIC_SERVER_URL;
+
 // 로그인
 const loginAPI = (data) => {
   return axios.post('/api/auth/login', data);
