@@ -8,7 +8,7 @@ import TVRoute from './TV';
 
 const RootRouter = () => (
   <BrowserRouter>
-    <Header />
+    {/* <Header /> */}
     <Switch>
       <Route path="/" exact component={HomeRoute} />
       <Route path="/tv" component={TVRoute} />
