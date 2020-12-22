@@ -1,5 +1,9 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+
+export const MinHeightBlock = styled.div`
+  min-height: 80vh;
+`;
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
