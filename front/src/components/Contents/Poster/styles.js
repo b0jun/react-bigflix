@@ -18,7 +18,7 @@ const DetailWrapper = styled.div`
     rgba(0, 0, 0, 0) 100%
   );
 
-  padding: 6rem 2rem 0;
+  padding: 4rem 2rem 0;
   display: flex;
   flex-direction: column;
   & > .title {
@@ -35,6 +35,7 @@ const DetailWrapper = styled.div`
     font-size: 1rem;
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.wide}) {
+    padding-top: 3.5rem;
     & > .title {
       font-size: 1rem;
     }
@@ -46,6 +47,7 @@ const DetailWrapper = styled.div`
     }
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    padding-top: 3rem;
     & > .title {
       font-size: 0.9rem;
     }
@@ -54,7 +56,7 @@ const DetailWrapper = styled.div`
     }
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
-    padding-top: 5rem;
+    padding-top: 2.5rem;
     & > .year {
       font-size: 0.8rem;
     }
@@ -66,7 +68,7 @@ const DetailWrapper = styled.div`
     }
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    padding-top: 4rem;
+    padding-top: 2rem;
     & > .title {
       font-size: 0.8rem;
     }
