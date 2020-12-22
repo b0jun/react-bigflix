@@ -21,45 +21,56 @@ const DetailWrapper = styled.div`
   padding: 6rem 2rem 0;
   display: flex;
   flex-direction: column;
-  .title {
+  & > .title {
     font-weight: 700;
     font-size: 1.1rem;
   }
-  .year {
+  & > .year {
     font-size: 1rem;
   }
-  .detail-item {
+  & > .detail-item {
     margin-bottom: 0.5rem;
   }
+  & > .genres {
+    font-size: 1rem;
+  }
   @media screen and (max-width: ${(props) => props.theme.responsive.wide}) {
-    .title {
+    & > .title {
       font-size: 1rem;
     }
-    .year {
+    & > .year {
       font-size: 0.9rem;
     }
-    .detail-item {
+    & > .detail-item {
       margin-bottom: 0.4rem;
     }
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
-    .title {
+    & > .title {
       font-size: 0.9rem;
     }
-    .detail-item {
+    & > .detail-item {
       margin-bottom: 0.3rem;
     }
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
-    .year {
+    padding-top: 5rem;
+    & > .year {
       font-size: 0.8rem;
     }
-    .detail-item {
+    & > .detail-item {
       margin-bottom: 0.3rem;
+    }
+    & > .genres {
+      font-size: 0.9rem;
     }
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    .title {
+    padding-top: 4rem;
+    & > .title {
+      font-size: 0.8rem;
+    }
+    & > .genres {
       font-size: 0.8rem;
     }
   }

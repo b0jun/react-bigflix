@@ -1,13 +1,27 @@
 import styled, { css } from 'styled-components';
 
 const SectionBlock = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    margin-bottom: 0.5rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    margin-bottom: 0;
+  }
 `;
 
 const Title = styled.div`
   font-size: 1.5rem;
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    font-size: 1.3rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    font-size: 1.1rem;
+  }
   margin-left: 1.5rem;
   font-weight: 700;
+  position: relative;
+  top: 0.6rem;
 `;
 
 const ContentsWrapper = styled.div`
@@ -69,6 +83,7 @@ const ScrollButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
   ${(props) =>
     props.isLeft
       ? css`
@@ -77,6 +92,7 @@ const ScrollButton = styled.div`
       : css`
           right: 0;
         `}
+
   ${(props) =>
     props.isLeft &&
     props.isHideLeft &&
@@ -89,6 +105,7 @@ const ScrollButton = styled.div`
     css`
       display: none;
     `}
+
   &:hover {
     background: rgba(26, 26, 26, 0.6);
     transition: background 0.5s;

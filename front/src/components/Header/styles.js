@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const HeaderBlock = styled.div`
+  z-index: 20;
   position: fixed;
   top: 0;
   left: 0;

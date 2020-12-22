@@ -1,8 +1,14 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-export const MinHeightBlock = styled.div`
+export const ContentsBlock = styled.div`
   min-height: 80vh;
+  position: relative;
+  top: -2.8rem;
+`;
+
+export const FlexWrapper = styled.div`
+  display: flex;
 `;
 
 const GlobalStyles = createGlobalStyle`
