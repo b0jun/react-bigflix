@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
 
 const SectionBlock = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 const Title = styled.div`
   font-size: 1.5rem;
   margin-left: 1.5rem;
+  font-weight: 700;
 `;
 
 const ContentsWrapper = styled.div`
@@ -16,34 +17,54 @@ const ContentsWrapper = styled.div`
 `;
 
 const Contents = styled.div`
-  display: flex;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  white-space: nowrap;
-  .poster_wrapper:first-child:hover {
-    margin-left: 2.1rem;
+  height: 23rem;
+  @media screen and (max-width: ${(props) => props.theme.responsive.wide}) {
+    height: 21rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    height: 19rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
+    height: 17rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    height: 16rem;
   }
 
-  .poster_wrapper:last-child:hover {
-    margin-right: 1.5rem;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  .poster_wrapper:first-child:hover {
+    margin-left: 0.5rem;
   }
 
   &:hover .poster_wrapper {
     opacity: 0.3;
     &:hover {
       opacity: 1;
-      .poster_img {
-        transform: scale(1.3);
-      }
     }
   }
 `;
 
 const ScrollButton = styled.div`
-  z-index: 11;
+  height: 20rem;
+  @media screen and (max-width: ${(props) => props.theme.responsive.wide}) {
+    height: 18rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    height: 16rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
+    height: 14rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    height: 13rem;
+  }
+
+  z-index: 4;
   position: absolute;
   width: 3rem;
-  height: calc(27rem * 0.9);
   display: flex;
   align-items: center;
   justify-content: center;

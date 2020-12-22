@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailWrapper, PosterBlock } from './styles';
+import Rating from '../Rating';
 
-const Poster = ({ imgUrl, title, year }) => {
+const Poster = ({ imgUrl, title, year, rating }) => {
   return (
-    <PosterBlock className="poster_wrapper">
+    <PosterBlock rating={rating} className="poster_wrapper">
       <img
         className="poster_img"
         src={
@@ -15,8 +16,9 @@ const Poster = ({ imgUrl, title, year }) => {
         alt={title}
       />
       <DetailWrapper>
-        <div className="title">{title}</div>
-        <div className="year">{year}</div>
+        <div className="title detail-item">{title}</div>
+        <div className="year detail-item">{year}</div>
+        <Rating rating={rating} />
       </DetailWrapper>
     </PosterBlock>
   );
@@ -25,6 +27,7 @@ const Poster = ({ imgUrl, title, year }) => {
 Poster.propTypes = {
   title: PropTypes.string.isRequired,
   imgUrl: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
 };
 
 export default Poster;

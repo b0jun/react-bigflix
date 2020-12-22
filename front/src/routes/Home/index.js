@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { MinHeightBlock } from '../../components/Common/GlobalStyles';
 import Spinner from '../../components/Common/Spinner';
 import Poster from '../../components/Contents/Poster';
 import Section from '../../components/Contents/Section';
@@ -15,9 +16,8 @@ const HomeRoute = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  console.log(homeResults);
   return (
-    <>
+    <MinHeightBlock>
       {homeResults && homeResults.popularMovie && (
         <Section title="현재 인기 영화">
           {homeResults.popularMovie.map((content) => (
@@ -26,6 +26,7 @@ const HomeRoute = () => {
               imgUrl={content.poster_path}
               title={content.title}
               year={content.release_date && content.release_date.substring(0, 4)}
+              rating={content.vote_average}
             />
           ))}
         </Section>
@@ -38,14 +39,51 @@ const HomeRoute = () => {
               imgUrl={content.poster_path}
               title={content.name}
               year={content.first_air_date && content.first_air_date.substring(0, 4)}
+              rating={content.vote_average}
             />
           ))}
         </Section>
       )}
-      <Section title="오늘 방영된 TV채널">d</Section>
-      <Section title="최고 평점 영화">d</Section>
-      <Section title="최고 평점 TV채널">d</Section>
-    </>
+      {homeResults && homeResults.airingTodayTV && (
+        <Section title="오늘 방영된 TV채널">
+          {homeResults.airingTodayTV.map((content) => (
+            <Poster
+              key={content.id}
+              imgUrl={content.poster_path}
+              title={content.name}
+              year={content.first_air_date && content.first_air_date.substring(0, 4)}
+              rating={content.vote_average}
+            />
+          ))}
+        </Section>
+      )}
+      {homeResults && homeResults.topRatedMovie && (
+        <Section title="최고 평점 영화">
+          {homeResults.topRatedMovie.map((content) => (
+            <Poster
+              key={content.id}
+              imgUrl={content.poster_path}
+              title={content.title}
+              year={content.release_date && content.release_date.substring(0, 4)}
+              rating={content.vote_average}
+            />
+          ))}
+        </Section>
+      )}
+      {homeResults && homeResults.topRatedTV && (
+        <Section title="최고 평점 TV채널">
+          {homeResults.topRatedTV.map((content) => (
+            <Poster
+              key={content.id}
+              imgUrl={content.poster_path}
+              title={content.name}
+              year={content.first_air_date && content.first_air_date.substring(0, 4)}
+              rating={content.vote_average}
+            />
+          ))}
+        </Section>
+      )}
+    </MinHeightBlock>
   );
 };
 

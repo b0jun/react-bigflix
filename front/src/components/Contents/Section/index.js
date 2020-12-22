@@ -66,7 +66,7 @@ const Section = ({ children, title }) => {
   const clickLeft = () => {
     let pageSize = 0 - getPageSize();
     const limit = 0;
-    let target = pageSize + SliderRef.current.scrollLeft;
+    let target = pageSize / 1.5 + SliderRef.current.scrollLeft;
     if (target < limit) {
       const dist = limit - target;
       pageSize = pageSize + dist;
@@ -80,7 +80,7 @@ const Section = ({ children, title }) => {
   const clickRight = () => {
     let pageSize = getPageSize();
     const limit = SliderRef.current.scrollWidth - SliderRef.current.offsetWidth;
-    let target = pageSize + SliderRef.current.scrollLeft;
+    let target = pageSize / 1.5 + SliderRef.current.scrollLeft;
     if (target > limit) {
       const dist = target - limit;
       pageSize = pageSize - dist;

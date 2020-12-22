@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import HomeRoute from './Home';
 import MovieRoute from './Movie';
@@ -16,6 +17,7 @@ const RootRouter = () => (
       <Route path="/mylist" component={MylistRoute} />
       <Redirect from="*" to="/" />
     </Switch>
+    <Footer />
   </BrowserRouter>
 );
 
