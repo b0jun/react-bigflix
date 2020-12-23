@@ -4,7 +4,7 @@ import { FaCaretDown } from 'react-icons/fa';
 import useYScroll from '../../hooks/useYScroll';
 import { GenreBoxBlock, GenreButton, GenreDropDown, Item } from './styles';
 
-const GenreBox = ({ genres }) => {
+const GenreBox = ({ genres, isMovie }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = useYScroll();
 
@@ -37,7 +37,7 @@ const GenreBox = ({ genres }) => {
         <FaCaretDown />
       </GenreButton>
       {isOpen && (
-        <GenreDropDown isOpen={isOpen} ref={modalRef}>
+        <GenreDropDown isOpen={isOpen} ref={modalRef} isMovie={isMovie}>
           {genres.map((genre) => (
             <Item key={genre.id}>{genre.name}</Item>
           ))}
@@ -49,6 +49,7 @@ const GenreBox = ({ genres }) => {
 
 GenreBox.propTypes = {
   genres: PropTypes.array.isRequired,
+  isMovie: PropTypes.bool.isRequired,
 };
 
 export default GenreBox;

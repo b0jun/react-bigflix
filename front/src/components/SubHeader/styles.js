@@ -34,11 +34,14 @@ const SubHeaderWrapper = styled.div`
     font-size: 2.3rem;
     font-weight: 700;
     text-shadow: 1px 1px 1px rgba(20, 20, 20, 0.3);
-    margin-right: 3rem;
+    margin-right: 2rem;
   }
 
   @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     padding: 0 1rem;
+    & > .sub-title {
+      font-size: 2rem;
+    }
   }
 `;
 

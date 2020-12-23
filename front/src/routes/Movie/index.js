@@ -25,7 +25,7 @@ const MovieRoute = () => {
     <>
       <SubHeader>
         <div className="sub-title">영화</div>
-        <GenreBox genres={MovieGenres} />
+        <GenreBox genres={MovieGenres} isMovie={true} />
       </SubHeader>
       {randomResults && randomResults.movieTrendingWeek && (
         <TopSection

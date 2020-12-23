@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailWrapper, PosterBlock } from './styles';
+import { DetailWrapper, PosterBlock, ButtonWrapper, Item } from './styles';
 import Rating from '../Rating';
 import { GenresData } from '../../../lib/util/GenresData';
+import { IoPlay } from 'react-icons/io5';
+import { FaChevronDown } from 'react-icons/fa';
 
 const Poster = ({ imgUrl, title, year, rating, genres }) => {
   return (
@@ -29,6 +31,14 @@ const Poster = ({ imgUrl, title, year, rating, genres }) => {
                 : `${GenresData[genre]} • `
             )}
         </div>
+        <ButtonWrapper>
+          <Item>
+            <IoPlay />
+          </Item>
+          <Item className="button detail-button">
+            <FaChevronDown />
+          </Item>
+        </ButtonWrapper>
       </DetailWrapper>
     </PosterBlock>
   );

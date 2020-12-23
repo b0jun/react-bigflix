@@ -25,7 +25,7 @@ const TVRoute = () => {
     <>
       <SubHeader>
         <div className="sub-title">TV 프로그램</div>
-        <GenreBox genres={TvGenres} />
+        <GenreBox genres={TvGenres} isMovie={false} />
       </SubHeader>
       {randomResults && randomResults.tvTrendingWeek && (
         <TopSection

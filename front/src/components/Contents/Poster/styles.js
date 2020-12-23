@@ -138,4 +138,34 @@ const PosterBlock = styled.div`
   }
 `;
 
-export { PosterBlock, DetailWrapper };
+const ButtonWrapper = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const Item = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.6);
+  border: 2px solid rgba(130, 130, 130, 0.3);
+  border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+  @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &:hover {
+    background: rgba(110, 110, 110, 0.7);
+  }
+`;
+
+export { PosterBlock, DetailWrapper, ButtonWrapper, Item };

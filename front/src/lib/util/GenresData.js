@@ -91,7 +91,7 @@ export const MovieGenres = [
   },
   {
     id: 10770,
-    name: 'TV / 영화',
+    name: 'TV 영화',
   },
   {
     id: 53,
@@ -110,7 +110,7 @@ export const MovieGenres = [
 export const TvGenres = [
   {
     id: 10759,
-    name: '액션 / 어드벤쳐',
+    name: '액션 어드벤쳐',
   },
   {
     id: 16,
