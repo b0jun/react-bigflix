@@ -13,6 +13,7 @@ const jwtMiddleware = async (req, res, next) => {
     req.user = {
       _id: decoded._id,
       email: decoded.email,
+      nickname: decoded.nickname,
     };
 
     const now = Math.floor(Date.now() / 1000);
