@@ -1,0 +1,54 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { FaCaretDown } from 'react-icons/fa';
+import useYScroll from '../../hooks/useYScroll';
+import { GenreBoxBlock, GenreButton, GenreDropDown, Item } from './styles';
+
+const GenreBox = ({ genres }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = useYScroll();
+
+  // 모달 외 영역 클릭 시 닫기
+  const modalRef = useRef();
+
+  const handleClickOutside = useCallback(
+    ({ target }) => {
+      if (isOpen && modalRef.current && !modalRef.current.contains(target)) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
+
+  useEffect(() => {
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
+  const onToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
+  return (
+    <GenreBoxBlock>
+      <GenreButton direction={direction} onClick={onToggle}>
+        <div className="text">장르</div>
+        <FaCaretDown />
+      </GenreButton>
+      {isOpen && (
+        <GenreDropDown isOpen={isOpen} ref={modalRef}>
+          {genres.map((genre) => (
+            <Item key={genre.id}>{genre.name}</Item>
+          ))}
+        </GenreDropDown>
+      )}
+    </GenreBoxBlock>
+  );
+};
+
+GenreBox.propTypes = {
+  genres: PropTypes.array.isRequired,
+};
+
+export default GenreBox;

@@ -11,7 +11,7 @@ export const SearchTabBlock = styled.div`
       ? css`
           & {
             border: 1px solid white;
-            background: rgba(12, 12, 12, 0.3);
+            background: rgba(12, 12, 12, 0.4);
           }
         `
       : css`
@@ -27,6 +27,11 @@ export const SearchInput = styled.input`
   font-size: 1rem;
   width: ${(props) => (props.isOpen ? '9rem' : '0')};
   transition: all 0.5s ease-in-out;
+
+  &::placeholder {
+    color: gray;
+  }
+
   ${(props) =>
     props.isOpen
       ? css`

@@ -4,6 +4,9 @@ import { ContentsBlock } from '../../components/Common/GlobalStyles';
 import Poster from '../../components/Contents/Poster';
 import Section from '../../components/Contents/Section';
 import TopSection from '../../components/Contents/TopSection';
+import GenreBox from '../../components/GenreBox';
+import SubHeader from '../../components/SubHeader';
+import { TvGenres } from '../../lib/util/GenresData';
 import { GET_RANDOM_REQUEST, LOAD_TV_REQUEST } from '../../redux/type';
 
 const TVRoute = () => {
@@ -20,6 +23,10 @@ const TVRoute = () => {
 
   return (
     <>
+      <SubHeader>
+        <div className="sub-title">TV 프로그램</div>
+        <GenreBox genres={TvGenres} />
+      </SubHeader>
       {randomResults && randomResults.tvTrendingWeek && (
         <TopSection
           id={randomResults.tvTrendingWeek.id}
@@ -37,7 +44,7 @@ const TVRoute = () => {
                 key={content.id}
                 imgUrl={content.poster_path}
                 title={content.name}
-                year={content.release_date && content.first_air_date.substring(0, 4)}
+                year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
               />

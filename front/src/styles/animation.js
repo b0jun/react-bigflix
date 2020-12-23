@@ -8,5 +8,12 @@ const fadeIn = keyframes`
   opacity: 1;
  }
 `;
-
-export { fadeIn };
+const fadeOut = keyframes`
+ from{
+   opacity: 1;
+ }
+ to{
+  opacity: 0;
+ }
+`;
+export { fadeIn, fadeOut };

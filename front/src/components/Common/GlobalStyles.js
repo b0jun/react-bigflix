@@ -7,6 +7,11 @@ export const ContentsBlock = styled.div`
   top: -2.8rem;
 `;
 
+export const MarginContentsBlock = styled.div`
+  min-height: 80vh;
+  margin-top: 8rem;
+`;
+
 export const FlexWrapper = styled.div`
   display: flex;
 `;
@@ -27,7 +32,11 @@ const GlobalStyles = createGlobalStyle`
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
 `;
 

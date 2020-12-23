@@ -33,6 +33,7 @@ const DetailWrapper = styled.div`
   }
   & > .genres {
     font-size: 1rem;
+    color: #b8b0b0;
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.wide}) {
     padding-top: 3.5rem;

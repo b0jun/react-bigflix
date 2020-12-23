@@ -12,7 +12,7 @@ const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
       <Info>
         <div className="title">{title}</div>
         <div className="overview">
-          &nbsp;{overview.length > 200 ? `${overview.substring(0, 270)}...` : overview}
+          &nbsp;{overview.length > 200 ? `${overview.substring(0, 250)}...` : overview}
         </div>
         <FlexWrapper>
           <DetailButton left>

@@ -45,13 +45,15 @@ const Info = styled.div`
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
     height: 32rem;
+    padding-top: 5rem;
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
     height: 29rem;
-    padding: 2rem;
+    padding: 5rem 3rem 0;
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     height: 27rem;
+    padding: 5rem 1rem 0;
   }
 
   & > .title {
@@ -62,22 +64,26 @@ const Info = styled.div`
   }
   & > .overview {
     text-shadow: 1px 1px 2px rgba(20, 20, 20, 0.8);
-    width: 50%;
-    max-width: 1000px;
+    width: 40vw;
+    max-width: 700px;
     line-height: 1.2rem;
     margin-bottom: 1rem;
-
+    font-size: 1.1rem;
+    @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+      font-size: 1rem;
+    }
     @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
-      width: 60%;
+      width: 60vw;
       font-size: 0.9rem;
     }
     @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-      width: 70%;
+      width: 70vw;
       font-size: 0.9rem;
       line-height: 1.1rem;
     }
   }
 `;
+
 const DetailButton = styled.div`
   display: flex;
   padding: 0.7rem 1.5rem;

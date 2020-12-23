@@ -25,6 +25,7 @@ const Hamburger = styled.div`
 `;
 
 const Dropdown = styled.div`
+  z-index: 30;
   position: absolute;
   top: 1rem;
   left: 0;
