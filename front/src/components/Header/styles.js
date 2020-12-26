@@ -14,9 +14,15 @@ const HeaderBlock = styled.div`
     width: 90px;
     margin-right: 2rem;
   }
+  ${(props) =>
+    !props.current &&
+    props.direction === -1 &&
+    css`
+      top: -4rem;
+    `}
 
   ${(props) =>
-    props.scrollY === 0 &&
+    props.scrollY <= 0 &&
     css`
       background: linear-gradient(
         to bottom,
@@ -25,13 +31,7 @@ const HeaderBlock = styled.div`
         rgba(20, 20, 20, 0) 100%
       );
       box-shadow: none;
-    `}
-
-  ${(props) =>
-    !props.current &&
-    props.direction === -1 &&
-    css`
-      top: -4rem;
+      top: 0;
     `}
 `;
 

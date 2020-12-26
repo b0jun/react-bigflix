@@ -11,15 +11,16 @@ const SubHeaderBlock = styled.div`
   transition: all 500ms ease;
 
   ${(props) =>
-    props.scrollY === 0 &&
-    css`
-      background: none;
-    `}
-
-  ${(props) =>
     props.direction === -1 &&
     css`
       top: 0;
+    `}
+
+  ${(props) =>
+    props.scrollY <= 0 &&
+    css`
+      background: none;
+      top: 4rem;
     `}
 `;
 

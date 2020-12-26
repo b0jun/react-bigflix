@@ -32,6 +32,7 @@ const GlobalStyles = createGlobalStyle`
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    // 드래그 방지
     -ms-user-select: none;
     -moz-user-select: -moz-none;
     -webkit-user-select: none;

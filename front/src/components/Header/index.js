@@ -8,9 +8,11 @@ import { Link, withRouter } from 'react-router-dom';
 import BurgerMenu from '../BurgerMenu';
 import AuthModal from '../AuthModal';
 import useYScroll from '../../hooks/useYScroll';
+
 const Header = ({ location: { pathname } }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const { y, direction } = useYScroll();
+
   return (
     <HeaderBlock current={pathname === '/'} scrollY={y} direction={direction}>
       <HeaderWrapper>

@@ -42,11 +42,13 @@ const MovieRoute = () => {
             {movieResults.movieTrendingDay.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.title}
                 year={content.release_date && content.release_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={true}
               />
             ))}
           </Section>
@@ -56,11 +58,13 @@ const MovieRoute = () => {
             {movieResults.movieTrendingWeek.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.title}
                 year={content.release_date && content.release_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={true}
               />
             ))}
           </Section>

@@ -42,11 +42,13 @@ const HomeRoute = () => {
             {homeResults.popularMovie.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.title}
                 year={content.release_date && content.release_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={true}
               />
             ))}
           </Section>
@@ -56,11 +58,13 @@ const HomeRoute = () => {
             {homeResults.popularTV.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.name}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={false}
               />
             ))}
           </Section>
@@ -70,11 +74,13 @@ const HomeRoute = () => {
             {homeResults.airingTodayTV.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.name}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={false}
               />
             ))}
           </Section>
@@ -84,11 +90,13 @@ const HomeRoute = () => {
             {homeResults.topRatedMovie.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.title}
                 year={content.release_date && content.release_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={true}
               />
             ))}
           </Section>
@@ -98,11 +106,13 @@ const HomeRoute = () => {
             {homeResults.topRatedTV.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.name}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={false}
               />
             ))}
           </Section>

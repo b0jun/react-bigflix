@@ -42,11 +42,13 @@ const TVRoute = () => {
             {tvResults.tvTrendingDay.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.name}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={false}
               />
             ))}
           </Section>
@@ -56,11 +58,13 @@ const TVRoute = () => {
             {tvResults.tvTrendingWeek.map((content) => (
               <Poster
                 key={content.id}
+                id={content.id}
                 imgUrl={content.poster_path}
                 title={content.name}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 rating={content.vote_average}
                 genres={content.genre_ids}
+                isMovie={false}
               />
             ))}
           </Section>

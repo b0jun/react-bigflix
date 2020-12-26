@@ -47,7 +47,6 @@ const authReducer = (state = initialState, action) => {
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-      console.log('132123', action.payload);
       localStorage.setItem('user', JSON.stringify(action.payload));
       return {
         ...state,
