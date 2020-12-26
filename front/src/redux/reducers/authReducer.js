@@ -36,7 +36,7 @@ const authReducer = (state = initialState, action) => {
     case TEMP_SET_USER:
       return {
         ...state,
-        userInfo: action.userInfo,
+        userInfo: JSON.parse(action.userInfo),
       };
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
@@ -47,7 +47,6 @@ const authReducer = (state = initialState, action) => {
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-      console.log(action.payload);
       localStorage.setItem('user', JSON.stringify(action.payload));
       return {
         ...state,

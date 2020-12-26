@@ -45,6 +45,7 @@ UserSchema.methods.generateToken = function () {
     {
       _id: this.id,
       email: this.email,
+      nickname: this.nickname,
     },
     JWT_SECRET,
     {

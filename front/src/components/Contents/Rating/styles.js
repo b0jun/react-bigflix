@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const RatingBlock = styled.div`
   display: flex;
+  margin-bottom: 0.5rem;
   .rating-wrapper {
     width: 100px;
     @media screen and (max-width: ${(props) => props.theme.responsive.wide}) {

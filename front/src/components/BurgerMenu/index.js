@@ -1,8 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { BurgerMenuBlock, Hamburger, Dropdown, Item } from './styles';
 
 const BurgerMenu = ({ location: { pathname } }) => {
+  const { userInfo } = useSelector((state) => state.auth);
+
   return (
     <BurgerMenuBlock>
       <Hamburger>
@@ -24,9 +27,11 @@ const BurgerMenu = ({ location: { pathname } }) => {
           <Link to="/movie">
             <Item current={pathname === '/movie'}>영화</Item>
           </Link>
-          <Link to="/mylist">
-            <Item current={pathname === '/mylist'}>내가 찜한 콘텐츠</Item>
-          </Link>
+          {userInfo && (
+            <Link to="/mylist">
+              <Item current={pathname === '/mylist'}>내가 찜한 콘텐츠</Item>
+            </Link>
+          )}
         </ul>
       </Dropdown>
     </BurgerMenuBlock>

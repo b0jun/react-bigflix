@@ -1,4 +1,7 @@
 import {
+  GET_RANDOM_REQUEST,
+  GET_RANDOM_SUCCESS,
+  GET_RANDOM_FAILURE,
   LOAD_HOME_FAILURE,
   LOAD_HOME_REQUEST,
   LOAD_HOME_SUCCESS,
@@ -15,6 +18,8 @@ const initialState = {
   homeResults: {},
   tvResults: {},
   movieResults: {},
+  randomResults: {},
+  getRandomLoading: false,
   contentsError: null,
 };
 
@@ -91,6 +96,27 @@ const contentsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      };
+    case GET_RANDOM_REQUEST:
+      return {
+        ...state,
+        getRandomLoading: true,
+      };
+    case GET_RANDOM_SUCCESS:
+      return {
+        ...state,
+        getRandomLoading: false,
+        randomResults: {
+          ...state.randomResult,
+          popularMovie: action.payload.popularMovie,
+          tvTrendingWeek: action.payload.tvTrendingWeek,
+          movieTrendingWeek: action.payload.movieTrendingWeek,
+        },
+      };
+    case GET_RANDOM_FAILURE:
+      return {
+        ...state,
+        getRandomLoading: false,
       };
     default:
       return state;

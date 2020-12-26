@@ -13,6 +13,7 @@ const AccountTab = () => {
       type: LOGOUT_REQUEST,
     });
   }, [dispatch]);
+
   return (
     <AccountTabBlock>
       <DropdownButton>
@@ -24,7 +25,7 @@ const AccountTab = () => {
           <div id="up" />
         </div>
         <ul>
-          <Item>{userInfo.nickname}</Item>
+          <Item>{userInfo.nickname && userInfo.nickname}</Item>
           <Item>프로필 관리</Item>
           <div className="line" />
           <Item>계정</Item>

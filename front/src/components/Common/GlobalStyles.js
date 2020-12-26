@@ -1,8 +1,19 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-export const MinHeightBlock = styled.div`
+export const ContentsBlock = styled.div`
   min-height: 80vh;
+  position: relative;
+  top: -2.8rem;
+`;
+
+export const MarginContentsBlock = styled.div`
+  min-height: 80vh;
+  margin-top: 8rem;
+`;
+
+export const FlexWrapper = styled.div`
+  display: flex;
 `;
 
 const GlobalStyles = createGlobalStyle`
@@ -21,7 +32,12 @@ const GlobalStyles = createGlobalStyle`
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+    // 드래그 방지
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
 `;
 

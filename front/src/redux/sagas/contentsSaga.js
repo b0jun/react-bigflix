@@ -1,6 +1,9 @@
 import { call, put, takeEvery, all, fork } from 'redux-saga/effects';
 import { movieApi, tvApi } from '../../lib/api/contentsAPI';
 import {
+  GET_RANDOM_FAILURE,
+  GET_RANDOM_REQUEST,
+  GET_RANDOM_SUCCESS,
   LOAD_HOME_FAILURE,
   LOAD_HOME_REQUEST,
   LOAD_HOME_SUCCESS,
@@ -149,6 +152,44 @@ function* watchLoadMovie() {
   yield takeEvery(LOAD_MOVIE_REQUEST, loadMovie);
 }
 
+// Random TopSection
+function* getRandom() {
+  try {
+    const {
+      data: { results: popularMovie },
+    } = yield call(loadPopularMovieAPI);
+    const {
+      data: { results: tvTrendingWeek },
+    } = yield call(loadTvTrendWeekAPI);
+    const {
+      data: { results: movieTrendingWeek },
+    } = yield call(loadMovieTrendWeekAPI);
+    yield put({
+      type: GET_RANDOM_SUCCESS,
+      payload: {
+        popularMovie: popularMovie[Math.floor(Math.random() * 20)],
+        tvTrendingWeek: tvTrendingWeek[Math.floor(Math.random() * 20)],
+        movieTrendingWeek: movieTrendingWeek[Math.floor(Math.random() * 20)],
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: GET_RANDOM_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchGetRandom() {
+  yield takeEvery(GET_RANDOM_REQUEST, getRandom);
+}
+
 export default function* contentsSaga() {
-  yield all([fork(watchLoadHome), fork(watchLoadTV), fork(watchLoadMovie)]);
+  yield all([
+    fork(watchLoadHome),
+    fork(watchLoadTV),
+    fork(watchLoadMovie),
+    fork(watchGetRandom),
+  ]);
 }
