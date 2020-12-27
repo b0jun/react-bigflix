@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BackDrop, TopSectionBlock, Info, DetailButton } from './styles';
+import { BackDrop, TopSectionBlock, Info } from './styles';
 import { MdInfoOutline } from 'react-icons/md';
 import { FlexWrapper } from '../../Common/GlobalStyles';
 import { IoPlay } from 'react-icons/io5';
+import SquareButton from '../../Common/SquareButton';
 
 const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
   return (
@@ -15,14 +16,14 @@ const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
           &nbsp;{overview.length > 200 ? `${overview.substring(0, 250)}...` : overview}
         </div>
         <FlexWrapper>
-          <DetailButton left>
+          <SquareButton marginR>
             <IoPlay />
             <p>&nbsp;재생</p>
-          </DetailButton>
-          <DetailButton>
+          </SquareButton>
+          <SquareButton gray>
             <MdInfoOutline />
             <p>&nbsp;상세 정보</p>
-          </DetailButton>
+          </SquareButton>
         </FlexWrapper>
       </Info>
     </TopSectionBlock>

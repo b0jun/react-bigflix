@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 import reset from 'styled-reset';
 
 export const ContentsBlock = styled.div`
@@ -14,6 +14,13 @@ export const MarginContentsBlock = styled.div`
 
 export const FlexWrapper = styled.div`
   display: flex;
+  align-items: center;
+
+  ${(props) =>
+    props.center &&
+    css`
+      justify-content: center;
+    `}
 `;
 
 const GlobalStyles = createGlobalStyle`

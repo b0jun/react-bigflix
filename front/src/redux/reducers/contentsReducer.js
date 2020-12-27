@@ -2,15 +2,19 @@ import {
   GET_RANDOM_REQUEST,
   GET_RANDOM_SUCCESS,
   GET_RANDOM_FAILURE,
-  LOAD_HOME_FAILURE,
   LOAD_HOME_REQUEST,
   LOAD_HOME_SUCCESS,
-  LOAD_MOVIE_FAILURE,
+  LOAD_HOME_FAILURE,
   LOAD_MOVIE_REQUEST,
   LOAD_MOVIE_SUCCESS,
-  LOAD_TV_FAILURE,
+  LOAD_MOVIE_FAILURE,
   LOAD_TV_REQUEST,
   LOAD_TV_SUCCESS,
+  LOAD_TV_FAILURE,
+  LOAD_DETAIL_REQUEST,
+  LOAD_DETAIL_SUCCESS,
+  LOAD_DETAIL_FAILURE,
+  CLEAR_DETAIL,
 } from '../type';
 
 const initialState = {
@@ -20,6 +24,8 @@ const initialState = {
   movieResults: {},
   randomResults: {},
   getRandomLoading: false,
+  detailResult: null,
+  detailLoading: false,
   contentsError: null,
 };
 
@@ -97,6 +103,23 @@ const contentsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
+    case LOAD_DETAIL_REQUEST:
+      return {
+        ...state,
+        detailLoading: true,
+        detailResult: null,
+      };
+    case LOAD_DETAIL_SUCCESS:
+      return {
+        ...state,
+        detailLoading: false,
+        detailResult: action.payload,
+      };
+    case LOAD_DETAIL_FAILURE:
+      return {
+        ...state,
+        detailLoading: false,
+      };
     case GET_RANDOM_REQUEST:
       return {
         ...state,
@@ -117,6 +140,12 @@ const contentsReducer = (state = initialState, action) => {
       return {
         ...state,
         getRandomLoading: false,
+      };
+
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        detailResult: null,
       };
     default:
       return state;

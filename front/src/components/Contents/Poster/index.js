@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DetailWrapper, PosterBlock, ButtonWrapper, Item } from './styles';
+import { DetailWrapper, PosterBlock, ButtonWrapper } from './styles';
 import Rating from '../Rating';
 import { GenresData } from '../../../lib/util/GenresData';
 import { IoPlay } from 'react-icons/io5';
@@ -8,16 +8,22 @@ import { FaChevronDown } from 'react-icons/fa';
 import { GoPlus } from 'react-icons/go';
 import ModalPortal from '../../../lib/ModalPortal';
 import DetailModal from '../../Detail/DetailModal';
+import { useDispatch } from 'react-redux';
+import { CLEAR_DETAIL } from '../../../redux/type';
+import CircleButton from '../../Common/CircleButton';
 
 const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
   const [visible, setVisble] = useState(false);
+  const dispatch = useDispatch();
 
   const onOpenModal = () => {
     setVisble(true);
   };
-  const onCloseModal = () => {
+  const onCloseModal = useCallback(() => {
     setVisble(false);
-  };
+    dispatch({ type: CLEAR_DETAIL }); // 모달 닫으면 콘텐츠 지우기
+  }, [dispatch]);
+
   return (
     <>
       <PosterBlock rating={rating} className="poster_wrapper">
@@ -44,15 +50,15 @@ const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
               )}
           </div>
           <ButtonWrapper>
-            <Item>
+            <CircleButton>
               <IoPlay />
-            </Item>
-            <Item>
+            </CircleButton>
+            <CircleButton>
               <GoPlus />
-            </Item>
-            <Item>
-              <FaChevronDown onClick={onOpenModal} />
-            </Item>
+            </CircleButton>
+            <CircleButton onClick={onOpenModal}>
+              <FaChevronDown />
+            </CircleButton>
           </ButtonWrapper>
         </DetailWrapper>
       </PosterBlock>

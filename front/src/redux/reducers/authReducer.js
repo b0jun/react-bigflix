@@ -73,6 +73,7 @@ const authReducer = (state = initialState, action) => {
         userInfo: action.payload,
       };
     case USER_LOADING_FAILURE:
+      localStorage.removeItem('user');
       return {
         ...state,
         isLoading: false,
