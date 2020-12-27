@@ -5,11 +5,12 @@ import { MdInfoOutline } from 'react-icons/md';
 import { FlexWrapper } from '../../Common/GlobalStyles';
 import { IoPlay } from 'react-icons/io5';
 import SquareButton from '../../Common/SquareButton';
+import noBackdrop from '../../../static/images/noBackdrop.png';
 
 const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
   return (
     <TopSectionBlock>
-      <BackDrop imgUrl={imgUrl} />
+      <BackDrop imgUrl={imgUrl ? imgUrl : noBackdrop} />
       <Info>
         <div className="title">{title}</div>
         <div className="overview">

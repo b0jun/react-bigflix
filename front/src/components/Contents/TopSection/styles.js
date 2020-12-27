@@ -61,6 +61,9 @@ const Info = styled.div`
     font-weight: 700;
     text-shadow: 1px 1px 2px rgba(20, 20, 20, 0.8);
     margin-bottom: 1rem;
+    @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
+      font-size: 2rem;
+    }
   }
   & > .overview {
     text-shadow: 1px 1px 2px rgba(20, 20, 20, 0.8);

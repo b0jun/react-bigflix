@@ -6,7 +6,7 @@ const { JWT_SECRET } = config;
 const jwtMiddleware = async (req, res, next) => {
   const token = req.cookies.access_token;
   if (!token) {
-    return res.status(401).send('토큰이 없습니다.');
+    return res.status(401).send('로그인 토큰이 만료되었습니다.');
   }
   try {
     const decoded = jwt.verify(token, JWT_SECRET);

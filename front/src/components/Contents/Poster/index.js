@@ -11,6 +11,7 @@ import DetailModal from '../../Detail/DetailModal';
 import { useDispatch } from 'react-redux';
 import { CLEAR_DETAIL } from '../../../redux/type';
 import CircleButton from '../../Common/CircleButton';
+import noPoster from '../../../static/images/noPoster.png';
 
 const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
   const [visible, setVisble] = useState(false);
@@ -29,11 +30,7 @@ const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
       <PosterBlock rating={rating} className="poster_wrapper">
         <img
           className="poster_img"
-          src={
-            imgUrl
-              ? `https://image.tmdb.org/t/p/w500/${imgUrl}`
-              : require('../../../static/images/noPoster.png')
-          }
+          src={imgUrl ? `https://image.tmdb.org/t/p/w500/${imgUrl}` : noPoster}
           alt={title}
         />
         <DetailWrapper>
