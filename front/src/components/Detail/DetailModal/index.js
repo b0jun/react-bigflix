@@ -1,26 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { IoClose, IoPlay } from 'react-icons/io5';
-import { GoPlus } from 'react-icons/go';
-import {
-  CloseButton,
-  DetailModalBlock,
-  BackDrop,
-  BackDropBottom,
-  DetailInfo,
-  DetailItem,
-  Title,
-  InfoLeft,
-  InfoRight,
-} from './styles';
+import { IoClose } from 'react-icons/io5';
+import { CloseButton, DetailModalBlock, DetailItem } from './styles';
 import { LOAD_DETAIL_REQUEST } from '../../../redux/type';
-import SquareButton from '../../Common/SquareButton';
-import { FlexWrapper } from '../../Common/GlobalStyles';
-import CircleButton from '../../Common/CircleButton';
 import Spinner from '../../Common/Spinner';
-import { runtimeConverter } from '../../../lib/util/ConvertData';
 import noBackdrop from '../../../static/images/noBackdrop.png';
+import DetailBackDrop from '../DetailBackDrop';
+import DetailInfo from '../DetailInfo';
+import { runtimeConverter } from '../../../lib/util/ConvertData';
 
 const DetailModal = ({ id, isMovie, onClose }) => {
   const dispatch = useDispatch();
@@ -34,6 +22,7 @@ const DetailModal = ({ id, isMovie, onClose }) => {
 
   const { detailResult, detailLoading } = useSelector((state) => state.contents);
   console.log(detailResult);
+
   return (
     <DetailModalBlock>
       <div className="top-wrapper">
@@ -46,95 +35,36 @@ const DetailModal = ({ id, isMovie, onClose }) => {
       ) : (
         detailResult && (
           <>
-            <div className="img-wrapper">
-              <BackDrop
-                src={
-                  detailResult.backdrop_path
-                    ? `https://image.tmdb.org/t/p/original/${detailResult.backdrop_path}`
-                    : noBackdrop
-                }
-                alt={isMovie ? detailResult.title : detailResult.name}
-              />
-              <BackDropBottom>
-                <Title>{isMovie ? detailResult.title : detailResult.name}</Title>
-                <FlexWrapper>
-                  <SquareButton marginR>
-                    <IoPlay />
-                    <p>&nbsp;재생</p>
-                  </SquareButton>
-                  <CircleButton>
-                    <GoPlus />
-                  </CircleButton>
-                </FlexWrapper>
-              </BackDropBottom>
-            </div>
+            <DetailBackDrop
+              title={isMovie ? detailResult.title : detailResult.name}
+              imgUrl={
+                detailResult.backdrop_path
+                  ? `https://image.tmdb.org/t/p/original/${detailResult.backdrop_path}`
+                  : noBackdrop
+              }
+            />
             <div className="contents-wrapper">
-              <DetailInfo>
-                <InfoLeft>
-                  <FlexWrapper>
-                    <div className="year info-item">
-                      {isMovie
-                        ? detailResult.release_date.substring(0, 4)
-                        : detailResult.last_air_date.substring(0, 4)}
-                    </div>
-                    <div className="info-item">
-                      {isMovie
-                        ? runtimeConverter(detailResult.runtime)
-                        : `시즌 ${detailResult.seasons.length}개`}
-                    </div>
-                  </FlexWrapper>
-                  <div className="overview">
-                    {detailResult.overview
-                      ? detailResult.overview
-                      : '본 콘텐츠의 줄거리는 준비 중입니다.'}
-                  </div>
-                </InfoLeft>
-                <InfoRight>
-                  <div className="genres-wrapper">
-                    <span>장르:</span>
-                    {detailResult.genres &&
-                      detailResult.genres.map((genre, index) =>
-                        index === detailResult.genres.length - 1
-                          ? genre.name
-                          : `${genre.name} • `
-                      )}
-                  </div>
-                  {!isMovie && detailResult.networks && (
-                    <div className="logo-wrapper">
-                      {detailResult.networks
-                        .slice(0, 4)
-                        .map(
-                          (network) =>
-                            network.logo_path && (
-                              <img
-                                className="logo"
-                                key={network.id}
-                                src={`https://image.tmdb.org/t/p/w200/${network.logo_path}`}
-                                alt={network.name}
-                              />
-                            )
-                        )}
-                    </div>
-                  )}
-                  {isMovie && (
-                    <div className="logo-wrapper">
-                      {detailResult.production_companies
-                        .slice(0, 4)
-                        .map(
-                          (company) =>
-                            company.logo_path && (
-                              <img
-                                className="logo"
-                                key={company.id}
-                                src={`https://image.tmdb.org/t/p/w200/${company.logo_path}`}
-                                alt={company.name}
-                              />
-                            )
-                        )}
-                    </div>
-                  )}
-                </InfoRight>
-              </DetailInfo>
+              <DetailInfo
+                year={
+                  isMovie
+                    ? detailResult.release_date.substring(0, 4)
+                    : detailResult.last_air_date.substring(0, 4)
+                }
+                sub={
+                  isMovie
+                    ? runtimeConverter(detailResult.runtime)
+                    : `시즌 ${detailResult.seasons.length}개`
+                }
+                overview={
+                  detailResult.overview
+                    ? detailResult.overview
+                    : '본 콘텐츠의 줄거리는 준비 중입니다.'
+                }
+                genres={detailResult.genres}
+                companies={
+                  isMovie ? detailResult.production_companies : detailResult.networks
+                }
+              />
               <DetailItem>TEMP</DetailItem>
               <DetailItem>TEMP</DetailItem>
               <DetailItem>TEMP</DetailItem>

@@ -74,6 +74,7 @@ Poster.propTypes = {
   title: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  genres: PropTypes.array.isRequired,
   isMovie: PropTypes.bool.isRequired,
 };
 
