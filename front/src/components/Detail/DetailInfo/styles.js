@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Block = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 `;
 
 const InfoLeft = styled.div`
@@ -40,6 +40,9 @@ const InfoRight = styled.div`
       max-width: 90px;
       height: auto;
       margin: 1rem;
+      @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
+        max-width: 70px;
+      }
     }
   }
 `;

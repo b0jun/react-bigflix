@@ -15,6 +15,9 @@ import {
   LOAD_DETAIL_SUCCESS,
   LOAD_DETAIL_FAILURE,
   CLEAR_DETAIL,
+  LOAD_SIMILAR_REQUEST,
+  LOAD_SIMILAR_SUCCESS,
+  LOAD_SIMILAR_FAILURE,
 } from '../type';
 
 const initialState = {
@@ -26,6 +29,8 @@ const initialState = {
   getRandomLoading: false,
   detailResult: null,
   detailLoading: false,
+  similarResults: null,
+  similarLoading: false,
   contentsError: null,
 };
 
@@ -119,6 +124,21 @@ const contentsReducer = (state = initialState, action) => {
       return {
         ...state,
         detailLoading: false,
+      };
+    case LOAD_SIMILAR_REQUEST:
+      return {
+        ...state,
+        similarLoading: true,
+      };
+    case LOAD_SIMILAR_SUCCESS:
+      return {
+        ...state,
+        similarLoading: false,
+        similarResults: action.payload,
+      };
+    case LOAD_SIMILAR_FAILURE:
+      return {
+        similarLoading: false,
       };
     case GET_RANDOM_REQUEST:
       return {

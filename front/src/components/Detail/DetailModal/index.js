@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoClose } from 'react-icons/io5';
-import { CloseButton, DetailModalBlock, DetailItem } from './styles';
-import { LOAD_DETAIL_REQUEST } from '../../../redux/type';
+import { CloseButton, DetailModalBlock } from './styles';
+import { LOAD_DETAIL_REQUEST, LOAD_SIMILAR_REQUEST } from '../../../redux/type';
 import Spinner from '../../Common/Spinner';
 import noBackdrop from '../../../static/images/noBackdrop.png';
+
 import DetailBackDrop from '../DetailBackDrop';
 import DetailInfo from '../DetailInfo';
 import { runtimeConverter } from '../../../lib/util/ConvertData';
+import SimilarWrapper from '../../SimilarContents/SimilarWrapper';
+import SimilarPoster from '../../SimilarContents/SimilarPoster';
 
 const DetailModal = ({ id, isMovie, onClose }) => {
   const dispatch = useDispatch();
@@ -18,10 +21,28 @@ const DetailModal = ({ id, isMovie, onClose }) => {
       type: LOAD_DETAIL_REQUEST,
       data: { id, isMovie },
     });
+    dispatch({
+      type: LOAD_SIMILAR_REQUEST,
+      data: { id, isMovie },
+    });
   }, [dispatch, id, isMovie]);
 
-  const { detailResult, detailLoading } = useSelector((state) => state.contents);
-  console.log(detailResult);
+  const { detailResult, detailLoading, similarResults, similarLoading } = useSelector(
+    (state) => state.contents
+  );
+  // console.log(detailResult);
+
+  const [simiarLimit, setSimilarLimit] = useState(12);
+  console.log(similarResults);
+
+  const onSimilarViewMore = useCallback(() => {
+    if (simiarLimit < 20) {
+      setSimilarLimit(20);
+    }
+    if (simiarLimit === 20) {
+      setSimilarLimit(12);
+    }
+  }, [simiarLimit]);
 
   return (
     <DetailModalBlock>
@@ -30,7 +51,7 @@ const DetailModal = ({ id, isMovie, onClose }) => {
           <IoClose size={30} />
         </CloseButton>
       </div>
-      {detailLoading ? (
+      {detailLoading || similarLoading ? (
         <Spinner />
       ) : (
         detailResult && (
@@ -39,7 +60,7 @@ const DetailModal = ({ id, isMovie, onClose }) => {
               title={isMovie ? detailResult.title : detailResult.name}
               imgUrl={
                 detailResult.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original/${detailResult.backdrop_path}`
+                  ? `https://image.tmdb.org/t/p/original${detailResult.backdrop_path}`
                   : noBackdrop
               }
             />
@@ -65,18 +86,24 @@ const DetailModal = ({ id, isMovie, onClose }) => {
                   isMovie ? detailResult.production_companies : detailResult.networks
                 }
               />
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
-              <DetailItem>TEMP</DetailItem>
+              <SimilarWrapper>
+                {similarResults.slice(0, simiarLimit).map((data) => (
+                  <SimilarPoster
+                    key={data.id}
+                    imgUrl={
+                      data.backdrop_path
+                        ? `https://image.tmdb.org/t/p/w300${data.backdrop_path}`
+                        : noBackdrop
+                    }
+                    title={isMovie ? data.title : data.name}
+                    overview={
+                      data.overview.length > 100
+                        ? `${data.overview.substring(0, 100)}...`
+                        : data.overview
+                    }
+                  />
+                ))}
+              </SimilarWrapper>
             </div>
           </>
         )

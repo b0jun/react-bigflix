@@ -13,6 +13,9 @@ import {
   LOAD_MOVIE_FAILURE,
   LOAD_MOVIE_REQUEST,
   LOAD_MOVIE_SUCCESS,
+  LOAD_SIMILAR_FAILURE,
+  LOAD_SIMILAR_REQUEST,
+  LOAD_SIMILAR_SUCCESS,
   LOAD_TV_FAILURE,
   LOAD_TV_REQUEST,
   LOAD_TV_SUCCESS,
@@ -193,6 +196,48 @@ function* watchLoadDetail() {
   yield takeEvery(LOAD_DETAIL_REQUEST, loadDetail);
 }
 
+// Similar Content
+const loadSimilarMovieAPI = (id) => {
+  return movieApi.movieSimilar(id);
+};
+
+const loadSimilarTVAPI = (id) => {
+  return tvApi.tvSimilar(id);
+};
+
+function* loadSimilar(action) {
+  try {
+    const { id, isMovie } = action.data;
+    if (isMovie) {
+      const {
+        data: { results },
+      } = yield call(loadSimilarMovieAPI, id);
+      yield put({
+        type: LOAD_SIMILAR_SUCCESS,
+        payload: results,
+      });
+    } else {
+      const {
+        data: { results },
+      } = yield call(loadSimilarTVAPI, id);
+      yield put({
+        type: LOAD_SIMILAR_SUCCESS,
+        payload: results,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_SIMILAR_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchLoadSimilar() {
+  yield takeEvery(LOAD_SIMILAR_REQUEST, loadSimilar);
+}
+
 // Random TopSection
 function* getRandom() {
   try {
@@ -232,6 +277,7 @@ export default function* contentsSaga() {
     fork(watchLoadTV),
     fork(watchLoadMovie),
     fork(watchLoadDetail),
+    fork(watchLoadSimilar),
     fork(watchGetRandom),
   ]);
 }
