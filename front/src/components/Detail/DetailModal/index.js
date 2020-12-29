@@ -36,11 +36,11 @@ const DetailModal = ({ id, isMovie, onClose }) => {
   console.log(similarResults);
 
   const onSimilarViewMore = useCallback(() => {
-    if (simiarLimit < 20) {
-      setSimilarLimit(20);
+    if (simiarLimit === 12) {
+      return setSimilarLimit(20);
     }
     if (simiarLimit === 20) {
-      setSimilarLimit(12);
+      return setSimilarLimit(12);
     }
   }, [simiarLimit]);
 
@@ -86,7 +86,7 @@ const DetailModal = ({ id, isMovie, onClose }) => {
                   isMovie ? detailResult.production_companies : detailResult.networks
                 }
               />
-              <SimilarWrapper>
+              <SimilarWrapper simiarLimit={simiarLimit} moreButton={onSimilarViewMore}>
                 {similarResults.slice(0, simiarLimit).map((data) => (
                   <SimilarPoster
                     key={data.id}

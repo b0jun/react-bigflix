@@ -1,5 +1,24 @@
 import styled from 'styled-components';
 
+const PosterWrapper = styled.div`
+  width: calc(100% / 3 - 0.6rem);
+  @media screen and (max-width: ${(props) => props.theme.similar.col3}) {
+    width: calc(100% / 2 - 0.3rem);
+  }
+  @media screen and (max-width: ${(props) => props.theme.similar.col2}) {
+    width: 100%;
+  }
+  margin-bottom: 0.6rem;
+  &:last-child {
+    margin-right: auto;
+    margin-left: 1rem;
+    @media screen and (max-width: ${(props) => props.theme.similar.col3}) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+`;
+
 const Img = styled.div`
   background: linear-gradient(
       to top,
@@ -14,18 +33,6 @@ const Img = styled.div`
   height: 10rem;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-`;
-
-const PosterWrapper = styled.div`
-  width: calc(100% / 3 - 0.6rem);
-  @media screen and (max-width: ${(props) => props.theme.similar.col3}) {
-    width: calc(100% / 2 - 0.3rem);
-  }
-  @media screen and (max-width: ${(props) => props.theme.similar.col2}) {
-    width: 100%;
-  }
-
-  margin-bottom: 0.6rem;
 `;
 
 const Info = styled.div`

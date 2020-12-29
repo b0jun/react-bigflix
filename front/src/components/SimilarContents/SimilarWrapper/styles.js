@@ -16,7 +16,7 @@ const ContentsWrapper = styled.div`
 `;
 const MoreWrapper = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: ${(props) => (props.isMore ? '0rem' : '-18rem')};
   background: linear-gradient(
     to top,
     rgba(24, 24, 24, 1) 0%,

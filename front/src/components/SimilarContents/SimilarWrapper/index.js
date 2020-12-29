@@ -8,17 +8,17 @@ import {
   MoreButton,
   Line,
 } from './styles';
-import { IoChevronDownSharp } from 'react-icons/io5';
-const SimilarWrapper = ({ children }) => {
+import { IoChevronDownSharp, IoChevronUpSharp } from 'react-icons/io5';
+const SimilarWrapper = ({ children, simiarLimit, moreButton }) => {
   return (
     <SimilarBlock>
       <Title>비슷한 콘텐츠</Title>
       <ContentsWrapper>{children}</ContentsWrapper>
-      <MoreWrapper>
+      <MoreWrapper isMore={simiarLimit === 12}>
         <div className="button-wrapper">
           <Line />
-          <MoreButton>
-            <IoChevronDownSharp />
+          <MoreButton onClick={moreButton}>
+            {simiarLimit === 12 ? <IoChevronDownSharp /> : <IoChevronUpSharp />}
           </MoreButton>
         </div>
       </MoreWrapper>
@@ -28,6 +28,7 @@ const SimilarWrapper = ({ children }) => {
 
 SimilarWrapper.propTypes = {
   children: PropTypes.node.isRequired,
+  moreButton: PropTypes.func.isRequired,
 };
 
 export default SimilarWrapper;
