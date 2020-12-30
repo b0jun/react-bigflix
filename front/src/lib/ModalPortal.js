@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-const ModalStyle = styled.div`
-  z-index: 1000;
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+// const ModalStyle = styled.div`
+//   z-index: 1000;
+//   position: fixed;
+//   height: 100%;
+//   width: 100%;
+//   top: 0;
+//   left: 0;
+//   background: rgba(0, 0, 0, 0.7);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 const ModalPortal = ({ children }) => {
   useEffect(() => {
@@ -26,7 +26,7 @@ const ModalPortal = ({ children }) => {
     };
   }, []);
   const el = document.getElementById('modal_root');
-  return createPortal(<ModalStyle>{children}</ModalStyle>, el);
+  return createPortal(children, el);
 };
 
 export default ModalPortal;

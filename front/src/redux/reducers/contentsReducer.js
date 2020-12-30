@@ -18,6 +18,10 @@ import {
   LOAD_SIMILAR_REQUEST,
   LOAD_SIMILAR_SUCCESS,
   LOAD_SIMILAR_FAILURE,
+  LOAD_SEASON_REQUEST,
+  LOAD_SEASON_SUCCESS,
+  LOAD_SEASON_FAILURE,
+  CHANGE_SEASON_NUMBER,
 } from '../type';
 
 const initialState = {
@@ -31,8 +35,16 @@ const initialState = {
   detailLoading: false,
   similarResults: null,
   similarLoading: false,
+  seasonResults: null,
+  seasonNumber: 1,
+  seasonLoading: false,
   contentsError: null,
 };
+
+export const changeSeasonNumber = (seasonNumber) => ({
+  type: CHANGE_SEASON_NUMBER,
+  seasonNumber,
+});
 
 const contentsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -140,6 +152,21 @@ const contentsReducer = (state = initialState, action) => {
       return {
         similarLoading: false,
       };
+    case LOAD_SEASON_REQUEST:
+      return {
+        ...state,
+        seasonLoading: true,
+      };
+    case LOAD_SEASON_SUCCESS:
+      return {
+        ...state,
+        seasonLoading: false,
+        seasonResults: action.payload,
+      };
+    case LOAD_SEASON_FAILURE:
+      return {
+        seasonLoading: false,
+      };
     case GET_RANDOM_REQUEST:
       return {
         ...state,
@@ -161,11 +188,16 @@ const contentsReducer = (state = initialState, action) => {
         ...state,
         getRandomLoading: false,
       };
-
     case CLEAR_DETAIL:
       return {
         ...state,
         detailResult: null,
+        seasonNumber: 1,
+      };
+    case CHANGE_SEASON_NUMBER:
+      return {
+        ...state,
+        seasonNumber: action.seasonNumber,
       };
     default:
       return state;

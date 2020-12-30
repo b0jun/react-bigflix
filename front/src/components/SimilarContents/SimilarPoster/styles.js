@@ -9,6 +9,8 @@ const PosterWrapper = styled.div`
     width: 100%;
   }
   margin-bottom: 0.6rem;
+
+  // 마지막 요소 왼쪽 정렬
   &:last-child {
     margin-right: auto;
     margin-left: 1rem;

@@ -13,6 +13,9 @@ import {
   LOAD_MOVIE_FAILURE,
   LOAD_MOVIE_REQUEST,
   LOAD_MOVIE_SUCCESS,
+  LOAD_SEASON_FAILURE,
+  LOAD_SEASON_REQUEST,
+  LOAD_SEASON_SUCCESS,
   LOAD_SIMILAR_FAILURE,
   LOAD_SIMILAR_REQUEST,
   LOAD_SIMILAR_SUCCESS,
@@ -238,6 +241,31 @@ function* watchLoadSimilar() {
   yield takeEvery(LOAD_SIMILAR_REQUEST, loadSimilar);
 }
 
+// Sesaon Content
+const loadSeasonAPI = ({ id, seasonNumber }) => {
+  return tvApi.tvSeasons(id, seasonNumber);
+};
+
+function* loadSeason(action) {
+  try {
+    const { data } = yield call(loadSeasonAPI, action.data);
+    yield put({
+      type: LOAD_SEASON_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_SEASON_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchLoadSeason() {
+  yield takeEvery(LOAD_SEASON_REQUEST, loadSeason);
+}
+
 // Random TopSection
 function* getRandom() {
   try {
@@ -278,6 +306,7 @@ export default function* contentsSaga() {
     fork(watchLoadMovie),
     fork(watchLoadDetail),
     fork(watchLoadSimilar),
+    fork(watchLoadSeason),
     fork(watchGetRandom),
   ]);
 }

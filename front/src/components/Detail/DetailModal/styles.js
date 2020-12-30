@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+const ModalStyle = styled.div`
+  z-index: 1000;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const DetailModalBlock = styled.div`
   position: relative;
   top: 2rem;
@@ -48,4 +61,4 @@ const CloseButton = styled.div`
   }
 `;
 
-export { DetailModalBlock, CloseButton };
+export { ModalStyle, DetailModalBlock, CloseButton };

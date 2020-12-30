@@ -14,6 +14,7 @@ const ContentsWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
 `;
+
 const MoreWrapper = styled.div`
   position: absolute;
   bottom: ${(props) => (props.isMore ? '0rem' : '-18rem')};
@@ -61,4 +62,17 @@ const MoreButton = styled.div`
   }
 `;
 
-export { SimilarBlock, Title, ContentsWrapper, MoreWrapper, MoreButton, Line };
+const Message = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  height: 7rem;
+  margin-bottom: 4rem;
+  color: rgb(120, 120, 120);
+  & > span {
+    font-weight: 700;
+  }
+`;
+
+export { SimilarBlock, Title, ContentsWrapper, MoreWrapper, MoreButton, Line, Message };

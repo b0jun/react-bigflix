@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Img, PosterWrapper, Info } from './styles';
-const SimilarPoster = ({ imgUrl, title, overview }) => {
+
+const SeasonPoster = ({ number, imgUrl, title, overview }) => {
   return (
     <PosterWrapper>
-      <Img imgUrl={imgUrl} />
+      <div className="number">{number}</div>
+      <div className="img-wrapper">
+        <Img src={imgUrl} />
+      </div>
       <Info>
         <div className="title">{title}</div>
         <div className="overview">
@@ -15,10 +19,11 @@ const SimilarPoster = ({ imgUrl, title, overview }) => {
   );
 };
 
-SimilarPoster.propTypes = {
-  imgUrl: PropTypes.string.isRequired,
+SeasonPoster.propTypes = {
+  number: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired,
 };
 
-export default SimilarPoster;
+export default SeasonPoster;

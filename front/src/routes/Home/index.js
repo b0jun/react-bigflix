@@ -17,14 +17,13 @@ const HomeRoute = () => {
       type: GET_RANDOM_REQUEST,
     });
   }, [dispatch]);
-  const { homeResults, isLoading, randomResults } = useSelector(
+  const { homeResults, isLoading, randomResults, getRandomLoading } = useSelector(
     (state) => state.contents
   );
 
-  if (isLoading) {
+  if (isLoading || getRandomLoading) {
     return <Spinner />;
   }
-  console.log(randomResults);
   return (
     <>
       {randomResults && randomResults.popularMovie && (
