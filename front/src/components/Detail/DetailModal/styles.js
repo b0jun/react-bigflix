@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+const ModalStyle = styled.div`
+  z-index: 1000;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const DetailModalBlock = styled.div`
   position: relative;
   top: 2rem;
@@ -20,9 +33,12 @@ const DetailModalBlock = styled.div`
   }
 
   & > .top-wrapper {
+    position: absolute;
     display: flex;
     justify-content: flex-end;
     padding: 1rem;
+    z-index: 50;
+    width: 100%;
   }
 
   & > .contents-wrapper {
@@ -31,18 +47,18 @@ const DetailModalBlock = styled.div`
 `;
 
 const CloseButton = styled.div`
-  padding: 0.1rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 100%;
   background: ${(props) => props.theme.palette.modal};
+  cursor: pointer;
 
   &:hover {
-    background: rgba(24, 24, 24, 0.7);
+    background: rgba(90, 90, 90, 0.8);
   }
 `;
-const Item = styled.div`
-  width: 100px;
-  height: 100px;
-  background: green;
-`;
 
-export { DetailModalBlock, CloseButton, Item };
+export { ModalStyle, DetailModalBlock, CloseButton };

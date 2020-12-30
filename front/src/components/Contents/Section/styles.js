@@ -71,6 +71,7 @@ const ScrollButton = styled.div`
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
     height: 14rem;
+    width: 2.5rem;
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     height: 13rem;

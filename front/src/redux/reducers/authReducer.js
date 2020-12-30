@@ -19,6 +19,7 @@ const initialState = {
   isLoading: false,
   userInfo: null,
   userError: null,
+  tokenError: null,
 };
 
 export const clearError = () => ({
@@ -60,11 +61,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         userError: action.error,
+        useInfo: null,
       };
     case USER_LOADING_REQUEST:
       return {
         ...state,
         isLoading: true,
+        tokenError: null,
       };
     case USER_LOADING_SUCCESS:
       return {
@@ -73,9 +76,12 @@ const authReducer = (state = initialState, action) => {
         userInfo: action.payload,
       };
     case USER_LOADING_FAILURE:
+      localStorage.removeItem('user');
       return {
         ...state,
         isLoading: false,
+        userInfo: null,
+        tokenError: action.error,
       };
     case LOGOUT_REQUEST:
       return {

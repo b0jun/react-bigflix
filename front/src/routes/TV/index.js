@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContentsBlock } from '../../components/Common/GlobalStyles';
+import Spinner from '../../components/Common/Spinner';
 import Poster from '../../components/Contents/Poster';
 import Section from '../../components/Contents/Section';
 import TopSection from '../../components/Contents/TopSection';
@@ -19,7 +20,13 @@ const TVRoute = () => {
       type: GET_RANDOM_REQUEST,
     });
   }, [dispatch]);
-  const { tvResults, randomResults } = useSelector((state) => state.contents);
+  const { tvResults, randomResults, isLoading, getRandomLoading } = useSelector(
+    (state) => state.contents
+  );
+
+  if (isLoading || getRandomLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

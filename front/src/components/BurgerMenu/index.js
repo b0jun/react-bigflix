@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { BurgerMenuBlock, Hamburger, Dropdown, Item } from './styles';
 
 const BurgerMenu = ({ location: { pathname } }) => {
@@ -36,6 +37,10 @@ const BurgerMenu = ({ location: { pathname } }) => {
       </Dropdown>
     </BurgerMenuBlock>
   );
+};
+
+BurgerMenu.propTypes = {
+  pathname: PropTypes.string,
 };
 
 export default withRouter(BurgerMenu);

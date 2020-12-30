@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DetailWrapper, PosterBlock, ButtonWrapper, Item } from './styles';
+import { DetailWrapper, PosterBlock, ButtonWrapper } from './styles';
 import Rating from '../Rating';
 import { GenresData } from '../../../lib/util/GenresData';
 import { IoPlay } from 'react-icons/io5';
@@ -8,26 +8,29 @@ import { FaChevronDown } from 'react-icons/fa';
 import { GoPlus } from 'react-icons/go';
 import ModalPortal from '../../../lib/ModalPortal';
 import DetailModal from '../../Detail/DetailModal';
+import { useDispatch } from 'react-redux';
+import { CLEAR_DETAIL } from '../../../redux/type';
+import CircleButton from '../../Common/CircleButton';
+import noPoster from '../../../static/images/noPoster.png';
 
 const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
   const [visible, setVisble] = useState(false);
+  const dispatch = useDispatch();
 
   const onOpenModal = () => {
     setVisble(true);
   };
-  const onCloseModal = () => {
+  const onCloseModal = useCallback(() => {
     setVisble(false);
-  };
+    dispatch({ type: CLEAR_DETAIL }); // 모달 닫으면 콘텐츠 지우기
+  }, [dispatch]);
+
   return (
     <>
       <PosterBlock rating={rating} className="poster_wrapper">
         <img
           className="poster_img"
-          src={
-            imgUrl
-              ? `https://image.tmdb.org/t/p/w500/${imgUrl}`
-              : require('../../../static/images/noPoster.png')
-          }
+          src={imgUrl ? `https://image.tmdb.org/t/p/w500/${imgUrl}` : noPoster}
           alt={title}
         />
         <DetailWrapper>
@@ -44,15 +47,15 @@ const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
               )}
           </div>
           <ButtonWrapper>
-            <Item>
+            <CircleButton>
               <IoPlay />
-            </Item>
-            <Item>
+            </CircleButton>
+            <CircleButton>
               <GoPlus />
-            </Item>
-            <Item>
-              <FaChevronDown onClick={onOpenModal} />
-            </Item>
+            </CircleButton>
+            <CircleButton onClick={onOpenModal}>
+              <FaChevronDown />
+            </CircleButton>
           </ButtonWrapper>
         </DetailWrapper>
       </PosterBlock>
@@ -71,6 +74,7 @@ Poster.propTypes = {
   title: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  genres: PropTypes.array.isRequired,
   isMovie: PropTypes.bool.isRequired,
 };
 

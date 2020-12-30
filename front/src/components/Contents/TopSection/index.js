@@ -1,28 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BackDrop, TopSectionBlock, Info, DetailButton } from './styles';
+import { BackDrop, TopSectionBlock, Info } from './styles';
 import { MdInfoOutline } from 'react-icons/md';
 import { FlexWrapper } from '../../Common/GlobalStyles';
 import { IoPlay } from 'react-icons/io5';
+import SquareButton from '../../Common/SquareButton';
+import noBackdrop from '../../../static/images/noBackdrop.png';
 
 const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
   return (
     <TopSectionBlock>
-      <BackDrop imgUrl={imgUrl} />
+      <BackDrop imgUrl={imgUrl ? imgUrl : noBackdrop} />
       <Info>
         <div className="title">{title}</div>
         <div className="overview">
-          &nbsp;{overview.length > 200 ? `${overview.substring(0, 250)}...` : overview}
+          &nbsp;{overview.length > 250 ? `${overview.substring(0, 250)}...` : overview}
         </div>
         <FlexWrapper>
-          <DetailButton left>
+          <SquareButton marginR>
             <IoPlay />
             <p>&nbsp;재생</p>
-          </DetailButton>
-          <DetailButton>
+          </SquareButton>
+          <SquareButton gray>
             <MdInfoOutline />
             <p>&nbsp;상세 정보</p>
-          </DetailButton>
+          </SquareButton>
         </FlexWrapper>
       </Info>
     </TopSectionBlock>

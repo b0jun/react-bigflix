@@ -4,12 +4,21 @@ import {
   GET_RANDOM_FAILURE,
   GET_RANDOM_REQUEST,
   GET_RANDOM_SUCCESS,
+  LOAD_DETAIL_FAILURE,
+  LOAD_DETAIL_REQUEST,
+  LOAD_DETAIL_SUCCESS,
   LOAD_HOME_FAILURE,
   LOAD_HOME_REQUEST,
   LOAD_HOME_SUCCESS,
   LOAD_MOVIE_FAILURE,
   LOAD_MOVIE_REQUEST,
   LOAD_MOVIE_SUCCESS,
+  LOAD_SEASON_FAILURE,
+  LOAD_SEASON_REQUEST,
+  LOAD_SEASON_SUCCESS,
+  LOAD_SIMILAR_FAILURE,
+  LOAD_SIMILAR_REQUEST,
+  LOAD_SIMILAR_SUCCESS,
   LOAD_TV_FAILURE,
   LOAD_TV_REQUEST,
   LOAD_TV_SUCCESS,
@@ -152,6 +161,111 @@ function* watchLoadMovie() {
   yield takeEvery(LOAD_MOVIE_REQUEST, loadMovie);
 }
 
+// Detail Content
+const loadDetailMovieAPI = (id) => {
+  return movieApi.movieDetail(id);
+};
+
+const loadDetailTVAPI = (id) => {
+  return tvApi.tvDetail(id);
+};
+
+function* loadDetail(action) {
+  try {
+    const { id, isMovie } = action.data;
+    if (isMovie) {
+      const { data } = yield call(loadDetailMovieAPI, id);
+      yield put({
+        type: LOAD_DETAIL_SUCCESS,
+        payload: data,
+      });
+    } else {
+      const { data } = yield call(loadDetailTVAPI, id);
+      yield put({
+        type: LOAD_DETAIL_SUCCESS,
+        payload: data,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_DETAIL_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchLoadDetail() {
+  yield takeEvery(LOAD_DETAIL_REQUEST, loadDetail);
+}
+
+// Similar Content
+const loadSimilarMovieAPI = (id) => {
+  return movieApi.movieSimilar(id);
+};
+
+const loadSimilarTVAPI = (id) => {
+  return tvApi.tvSimilar(id);
+};
+
+function* loadSimilar(action) {
+  try {
+    const { id, isMovie } = action.data;
+    if (isMovie) {
+      const {
+        data: { results },
+      } = yield call(loadSimilarMovieAPI, id);
+      yield put({
+        type: LOAD_SIMILAR_SUCCESS,
+        payload: results,
+      });
+    } else {
+      const {
+        data: { results },
+      } = yield call(loadSimilarTVAPI, id);
+      yield put({
+        type: LOAD_SIMILAR_SUCCESS,
+        payload: results,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_SIMILAR_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchLoadSimilar() {
+  yield takeEvery(LOAD_SIMILAR_REQUEST, loadSimilar);
+}
+
+// Sesaon Content
+const loadSeasonAPI = ({ id, seasonNumber }) => {
+  return tvApi.tvSeasons(id, seasonNumber);
+};
+
+function* loadSeason(action) {
+  try {
+    const { data } = yield call(loadSeasonAPI, action.data);
+    yield put({
+      type: LOAD_SEASON_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_SEASON_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchLoadSeason() {
+  yield takeEvery(LOAD_SEASON_REQUEST, loadSeason);
+}
+
 // Random TopSection
 function* getRandom() {
   try {
@@ -190,6 +304,9 @@ export default function* contentsSaga() {
     fork(watchLoadHome),
     fork(watchLoadTV),
     fork(watchLoadMovie),
+    fork(watchLoadDetail),
+    fork(watchLoadSimilar),
+    fork(watchLoadSeason),
     fork(watchGetRandom),
   ]);
 }

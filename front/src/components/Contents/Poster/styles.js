@@ -58,6 +58,7 @@ const DetailWrapper = styled.div`
     }
   }
   @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
+    padding: 0 1.5rem 1rem;
     & > .year {
       font-size: 0.8rem;
     }
@@ -194,31 +195,4 @@ const ButtonWrapper = styled.div`
   justify-content: space-around;
 `;
 
-const Item = styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(20, 20, 20, 0.6);
-  border: 2px solid rgba(130, 130, 130, 0.3);
-  border-radius: 100%;
-  width: 3rem;
-  height: 3rem;
-  transition: all 200ms ease;
-
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-  @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  &:hover {
-    background: rgba(110, 110, 110, 0.7);
-    border: 2px solid white;
-  }
-`;
-
-export { PosterBlock, DetailWrapper, ButtonWrapper, Item };
+export { PosterBlock, DetailWrapper, ButtonWrapper };

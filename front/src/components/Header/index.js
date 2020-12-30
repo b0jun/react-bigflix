@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { HeaderBlock, HeaderWrapper, Menu, MenuItem, RightMenu } from './styles';
 import logo from '../../static/images/logo.png';
 import SearchTab from '../SearchTab';
 import AccountTab from '../AccountTab';
-import { Link, withRouter } from 'react-router-dom';
 import BurgerMenu from '../BurgerMenu';
 import AuthModal from '../AuthModal';
 import useYScroll from '../../hooks/useYScroll';
@@ -47,4 +48,7 @@ const Header = ({ location: { pathname } }) => {
   );
 };
 
+Header.propTypes = {
+  pathname: PropTypes.string,
+};
 export default withRouter(Header);
