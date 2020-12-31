@@ -11,7 +11,7 @@ export const theme = {
     wide: '1200px',
   },
   similar: {
-    col3: '745px',
-    col2: '545px',
+    col2: '745px',
+    col1: '545px',
   },
 };

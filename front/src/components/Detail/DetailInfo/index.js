@@ -42,7 +42,7 @@ const DetailInfo = ({ year, sub, overview, genres, companies }) => {
 };
 
 DetailInfo.propTypes = {
-  year: PropTypes.string.isRequired,
+  year: PropTypes.string,
   sub: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
   genres: PropTypes.array.isRequired,

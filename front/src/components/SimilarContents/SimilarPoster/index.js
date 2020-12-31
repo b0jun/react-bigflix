@@ -4,7 +4,9 @@ import { Img, PosterWrapper, Info } from './styles';
 const SimilarPoster = ({ imgUrl, title, overview }) => {
   return (
     <PosterWrapper>
-      <Img imgUrl={imgUrl} />
+      <div className="img-wrapper">
+        <Img src={imgUrl} />
+      </div>
       <Info>
         <div className="title">{title}</div>
         <div className="overview">

@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const SimilarBlock = styled.div`
   position: relative;
+  margin-bottom: 2rem;
 `;
 const Title = styled.div`
   font-size: 1.5rem;
@@ -12,12 +13,15 @@ const Title = styled.div`
 const ContentsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  margin: 0 -0.3rem;
+  @media screen and (max-width: ${(props) => props.theme.similar.col1}) {
+    margin: 0;
+  }
 `;
 
 const MoreWrapper = styled.div`
   position: absolute;
-  bottom: ${(props) => (props.isMore ? '0rem' : '-18rem')};
+  z-index: 51;
   background: linear-gradient(
     to top,
     rgba(24, 24, 24, 1) 0%,
@@ -27,6 +31,17 @@ const MoreWrapper = styled.div`
   );
   width: 100%;
   height: 20rem;
+
+  ${(props) =>
+    props.isMore
+      ? css`
+          bottom: 0rem;
+          z-index: 51;
+        `
+      : css`
+          bottom: -16.5rem;
+          z-index: 49;
+        `}
 
   & > .button-wrapper {
     width: 100%;

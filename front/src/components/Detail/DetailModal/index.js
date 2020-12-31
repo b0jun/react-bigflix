@@ -86,8 +86,10 @@ const DetailModal = ({ id, isMovie, onClose }) => {
                 <DetailInfo
                   year={
                     isMovie
-                      ? detailResult.release_date.substring(0, 4)
-                      : detailResult.last_air_date.substring(0, 4)
+                      ? detailResult.release_date &&
+                        detailResult.release_date.substring(0, 4)
+                      : detailResult.last_air_date &&
+                        detailResult.last_air_date.substring(0, 4)
                   }
                   sub={
                     isMovie
@@ -138,6 +140,7 @@ const DetailModal = ({ id, isMovie, onClose }) => {
                 <SimilarWrapper
                   simiarLimit={simiarLimit}
                   moreButton={onSimilarViewMore}
+                  isMoreShow={similarResults.length > 12}
                   isContents={similarResults.length !== 0}
                   isMovie={isMovie}
                 >
@@ -149,7 +152,7 @@ const DetailModal = ({ id, isMovie, onClose }) => {
                           key={data.id}
                           imgUrl={
                             data.backdrop_path
-                              ? `https://image.tmdb.org/t/p/w300${data.backdrop_path}`
+                              ? `https://image.tmdb.org/t/p/w500${data.backdrop_path}`
                               : noBackdrop
                           }
                           title={isMovie ? data.title : data.name}
