@@ -75,6 +75,17 @@ const MoreButton = styled.div`
   &:hover {
     background: rgba(110, 110, 110, 0.8);
   }
+
+  & > .similar-icon {
+    transition: transform 200ms ease-in-out;
+  }
+  ${(props) =>
+    props.visible &&
+    css`
+      & > .similar-icon {
+        transform: rotate(0.5turn);
+      }
+    `}
 `;
 
 const Message = styled.div`

@@ -9,7 +9,7 @@ import {
   Line,
   Message,
 } from './styles';
-import { IoChevronDownSharp, IoChevronUpSharp } from 'react-icons/io5';
+import { IoChevronDownSharp } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 
 const SimilarWrapper = ({
@@ -32,8 +32,8 @@ const SimilarWrapper = ({
             <MoreWrapper isMore={simiarLimit === 12}>
               <div className="button-wrapper">
                 <Line />
-                <MoreButton onClick={moreButton}>
-                  {simiarLimit === 12 ? <IoChevronDownSharp /> : <IoChevronUpSharp />}
+                <MoreButton visible={simiarLimit === 12} onClick={moreButton}>
+                  <IoChevronDownSharp className="similar-icon" />
                 </MoreButton>
               </div>
             </MoreWrapper>
