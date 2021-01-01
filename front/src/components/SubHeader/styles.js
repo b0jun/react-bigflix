@@ -38,6 +38,11 @@ const SubHeaderWrapper = styled.div`
     margin-right: 2rem;
   }
 
+  & > .go-back {
+    color: rgb(130, 130, 130);
+    margin-right: 1rem;
+  }
+
   @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     padding: 0 1rem;
     & > .sub-title {

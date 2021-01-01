@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FaCaretDown } from 'react-icons/fa';
 import useYScroll from '../../hooks/useYScroll';
 import { GenreBoxBlock, GenreButton, GenreDropDown, Item } from './styles';
+import { Link } from 'react-router-dom';
 
 const GenreBox = ({ genres, isMovie }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,12 @@ const GenreBox = ({ genres, isMovie }) => {
       {isOpen && (
         <GenreDropDown isOpen={isOpen} ref={modalRef} isMovie={isMovie}>
           {genres.map((genre) => (
-            <Item key={genre.id}>{genre.name}</Item>
+            <Link
+              key={genre.id}
+              to={isMovie ? `/movie/genre/${genre.id}` : `/tv/genre/${genre.id}`}
+            >
+              <Item>{genre.name}</Item>
+            </Link>
           ))}
         </GenreDropDown>
       )}

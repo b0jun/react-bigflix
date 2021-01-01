@@ -7,6 +7,9 @@ import {
   LOAD_DETAIL_FAILURE,
   LOAD_DETAIL_REQUEST,
   LOAD_DETAIL_SUCCESS,
+  LOAD_GENRE_FAILURE,
+  LOAD_GENRE_REQUEST,
+  LOAD_GENRE_SUCCESS,
   LOAD_HOME_FAILURE,
   LOAD_HOME_REQUEST,
   LOAD_HOME_SUCCESS,
@@ -266,6 +269,47 @@ function* watchLoadSeason() {
   yield takeEvery(LOAD_SEASON_REQUEST, loadSeason);
 }
 
+// Genre Content
+const loadGenreMovieAPI = (id) => {
+  return movieApi.movieDiscover(id, 1);
+};
+const loadGenreTVAPI = (id) => {
+  return tvApi.tvDiscover(id, 1);
+};
+
+function* loadGenre(action) {
+  try {
+    const { id, isMovie } = action.data;
+    if (isMovie) {
+      const {
+        data: { results },
+      } = yield call(loadGenreMovieAPI, id);
+      yield put({
+        type: LOAD_GENRE_SUCCESS,
+        payload: results,
+      });
+    } else {
+      const {
+        data: { results },
+      } = yield call(loadGenreTVAPI, id);
+      yield put({
+        type: LOAD_GENRE_SUCCESS,
+        payload: results,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_GENRE_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchLoadGenre() {
+  yield takeEvery(LOAD_GENRE_REQUEST, loadGenre);
+}
+
 // Random TopSection
 function* getRandom() {
   try {
@@ -307,6 +351,7 @@ export default function* contentsSaga() {
     fork(watchLoadDetail),
     fork(watchLoadSimilar),
     fork(watchLoadSeason),
+    fork(watchLoadGenre),
     fork(watchGetRandom),
   ]);
 }
