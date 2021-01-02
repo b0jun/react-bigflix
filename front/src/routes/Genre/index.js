@@ -17,13 +17,13 @@ const GenreRoute = ({
 }) => {
   const { genreResults } = useSelector((state) => state.contents);
   const dispatch = useDispatch();
+  const isMovie = url.indexOf('/movie') !== -1;
   useEffect(() => {
-    const isMovie = url.indexOf('/movie') !== -1;
     dispatch({
       type: LOAD_GENRE_REQUEST,
       data: { id, isMovie },
     });
-  }, [dispatch, url, id]);
+  }, [dispatch, isMovie, id]);
 
   const goBack = () => {
     history.goBack();
@@ -44,15 +44,15 @@ const GenreRoute = ({
               key={content.id}
               id={content.id}
               imgUrl={content.poster_path}
-              title={url.indexOf('/movie') !== -1 ? content.title : content.name}
+              title={isMovie ? content.title : content.name}
               year={
-                url.indexOf('/movie') !== -1
+                isMovie
                   ? content.release_date && content.release_date.substring(0, 4)
                   : content.first_air_date && content.first_air_date.substring(0, 4)
               }
               rating={content.vote_average}
               genres={content.genre_ids}
-              isMovie={url.indexOf('/movie') !== -1 ? true : false}
+              isMovie={isMovie}
             />
           ))}
       </Wrapper>
