@@ -190,6 +190,7 @@ const contentsReducer = (state = initialState, action) => {
       return {
         ...state,
         getRandomLoading: true,
+        genreResults: null,
       };
     case GET_RANDOM_SUCCESS:
       return {

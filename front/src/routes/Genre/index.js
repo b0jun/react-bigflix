@@ -7,6 +7,7 @@ import SubHeader from '../../components/SubHeader';
 import Wrapper from '../../components/Contents/Wrapper';
 import { withRouter } from 'react-router-dom';
 import { GenresData } from '../../lib/util/GenresData';
+import Spinner from '../../components/Common/Spinner';
 
 const GenreRoute = ({
   match: {
@@ -15,7 +16,7 @@ const GenreRoute = ({
   },
   history,
 }) => {
-  const { genreResults } = useSelector((state) => state.contents);
+  const { genreResults, isLoading } = useSelector((state) => state.contents);
   const dispatch = useDispatch();
   const isMovie = url.indexOf('/movie') !== -1;
   useEffect(() => {
@@ -28,17 +29,18 @@ const GenreRoute = ({
   const goBack = () => {
     history.goBack();
   };
-
   return (
     <>
       <SubHeader>
         <div className="go-back" onClick={goBack}>
-          {url.indexOf('/movie') !== -1 ? '영화 >' : 'TV 프로그램 >'}
+          {isMovie ? '영화 >' : 'TV 프로그램 >'}
         </div>
         <div className="sub-title">{GenresData[url.split('/')[3]]}</div>
       </SubHeader>
       <Wrapper>
-        {genreResults &&
+        {isLoading || !genreResults ? (
+          <Spinner />
+        ) : (
           genreResults.map((content) => (
             <Poster
               key={content.id}
@@ -52,9 +54,10 @@ const GenreRoute = ({
               }
               rating={content.vote_average}
               genres={content.genre_ids}
-              isMovie={isMovie}
+              isMovie={true}
             />
-          ))}
+          ))
+        )}
       </Wrapper>
     </>
   );

@@ -8,7 +8,7 @@ import { FaChevronDown } from 'react-icons/fa';
 import { GoPlus } from 'react-icons/go';
 import ModalPortal from '../../../lib/ModalPortal';
 import DetailModal from '../../Detail/DetailModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CLEAR_DETAIL } from '../../../redux/type';
 import CircleButton from '../../Common/CircleButton';
 import noPoster from '../../../static/images/noPoster.png';
@@ -24,6 +24,7 @@ const Poster = ({
   isMovie,
   location: { pathname },
 }) => {
+  const { userInfo } = useSelector((state) => state.auth);
   const [visible, setVisble] = useState(false);
   const dispatch = useDispatch();
 
@@ -63,9 +64,11 @@ const Poster = ({
             <CircleButton>
               <IoPlay />
             </CircleButton>
-            <CircleButton>
-              <GoPlus />
-            </CircleButton>
+            {userInfo && (
+              <CircleButton>
+                <GoPlus />
+              </CircleButton>
+            )}
             <CircleButton onClick={onOpenModal}>
               <FaChevronDown />
             </CircleButton>
