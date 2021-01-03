@@ -2,37 +2,25 @@ import styled from 'styled-components';
 
 const PosterWrapper = styled.div`
   width: calc(100% / 3 - 0.6rem);
-  @media screen and (max-width: ${(props) => props.theme.similar.col3}) {
-    width: calc(100% / 2 - 0.3rem);
-  }
+  margin: 0 0.3rem 0.6rem;
   @media screen and (max-width: ${(props) => props.theme.similar.col2}) {
-    width: 100%;
+    width: calc(100% / 2 - 0.6rem);
   }
-  margin-bottom: 0.6rem;
+  @media screen and (max-width: ${(props) => props.theme.similar.col1}) {
+    width: 100%;
+    margin: 0 0 0.6rem;
+  }
+  z-index: 50;
 
-  // 마지막 요소 왼쪽 정렬
-  &:last-child {
-    margin-right: auto;
-    margin-left: 1rem;
-    @media screen and (max-width: ${(props) => props.theme.similar.col3}) {
-      margin-left: 0;
-      margin-right: 0;
-    }
+  .img-wrapper {
+    background: ${(props) => props.theme.palette.similar};
   }
 `;
 
-const Img = styled.div`
-  background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 0.6) 30%,
-      rgba(0, 0, 0, 0) 100%
-    ),
-    url(${(props) => props.imgUrl});
-
-  background-position: center center;
-  background-size: cover;
-  height: 10rem;
+const Img = styled.img`
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 `;
@@ -54,7 +42,7 @@ const Info = styled.div`
     line-height: 1.2rem;
   }
 
-  @media screen and (max-width: ${(props) => props.theme.similar.col3}) {
+  @media screen and (max-width: ${(props) => props.theme.similar.col2}) {
     min-height: 12rem;
     & > .title {
       font-size: 1rem;

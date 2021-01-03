@@ -8,12 +8,23 @@ import { FaChevronDown } from 'react-icons/fa';
 import { GoPlus } from 'react-icons/go';
 import ModalPortal from '../../../lib/ModalPortal';
 import DetailModal from '../../Detail/DetailModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CLEAR_DETAIL } from '../../../redux/type';
 import CircleButton from '../../Common/CircleButton';
 import noPoster from '../../../static/images/noPoster.png';
+import { withRouter } from 'react-router-dom';
 
-const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
+const Poster = ({
+  id,
+  imgUrl,
+  title,
+  year,
+  rating,
+  genres,
+  isMovie,
+  location: { pathname },
+}) => {
+  const { userInfo } = useSelector((state) => state.auth);
   const [visible, setVisble] = useState(false);
   const dispatch = useDispatch();
 
@@ -24,10 +35,13 @@ const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
     setVisble(false);
     dispatch({ type: CLEAR_DETAIL }); // 모달 닫으면 콘텐츠 지우기
   }, [dispatch]);
-
   return (
     <>
-      <PosterBlock rating={rating} className="poster_wrapper">
+      <PosterBlock
+        rating={rating}
+        className="poster_wrapper"
+        isSlider={pathname.indexOf('genre') === -1}
+      >
         <img
           className="poster_img"
           src={imgUrl ? `https://image.tmdb.org/t/p/w500/${imgUrl}` : noPoster}
@@ -50,9 +64,11 @@ const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
             <CircleButton>
               <IoPlay />
             </CircleButton>
-            <CircleButton>
-              <GoPlus />
-            </CircleButton>
+            {userInfo && (
+              <CircleButton>
+                <GoPlus />
+              </CircleButton>
+            )}
             <CircleButton onClick={onOpenModal}>
               <FaChevronDown />
             </CircleButton>
@@ -70,7 +86,7 @@ const Poster = ({ id, imgUrl, title, year, rating, genres, isMovie }) => {
 
 Poster.propTypes = {
   id: PropTypes.number.isRequired,
-  imgUrl: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
@@ -78,4 +94,4 @@ Poster.propTypes = {
   isMovie: PropTypes.bool.isRequired,
 };
 
-export default Poster;
+export default withRouter(Poster);

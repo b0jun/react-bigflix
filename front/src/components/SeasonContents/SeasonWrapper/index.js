@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   SeasonBlock,
@@ -40,6 +40,25 @@ const SeasonWrapper = ({ children, seasons }) => {
     });
   }, [dispatch, detailResult.id, seasonNumber]);
 
+  // 모달 외 영역 클릭 시 닫기
+  const modalRef = useRef();
+
+  const handleClickOutside = useCallback(
+    ({ target }) => {
+      if (visible && modalRef.current && !modalRef.current.contains(target)) {
+        setVisible(false);
+      }
+    },
+    [visible]
+  );
+
+  useEffect(() => {
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   return (
     <SeasonBlock>
       <div className="top-wrapper">
@@ -50,7 +69,7 @@ const SeasonWrapper = ({ children, seasons }) => {
             <FaCaretDown className="season-icon" />
           </SeasonButton>
           {visible && (
-            <SeasonDropDown>
+            <SeasonDropDown ref={modalRef}>
               {seasons[0].season_number === 0
                 ? seasons.slice(1).map((season) => (
                     <Item

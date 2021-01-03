@@ -22,6 +22,9 @@ import {
   LOAD_SEASON_SUCCESS,
   LOAD_SEASON_FAILURE,
   CHANGE_SEASON_NUMBER,
+  LOAD_GENRE_REQUEST,
+  LOAD_GENRE_SUCCESS,
+  LOAD_GENRE_FAILURE,
 } from '../type';
 
 const initialState = {
@@ -38,6 +41,7 @@ const initialState = {
   seasonResults: null,
   seasonNumber: 1,
   seasonLoading: false,
+  genreResults: null,
   contentsError: null,
 };
 
@@ -167,10 +171,26 @@ const contentsReducer = (state = initialState, action) => {
       return {
         seasonLoading: false,
       };
+    case LOAD_GENRE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case LOAD_GENRE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        genreResults: action.payload,
+      };
+    case LOAD_GENRE_FAILURE:
+      return {
+        isLoading: false,
+      };
     case GET_RANDOM_REQUEST:
       return {
         ...state,
         getRandomLoading: true,
+        genreResults: null,
       };
     case GET_RANDOM_SUCCESS:
       return {

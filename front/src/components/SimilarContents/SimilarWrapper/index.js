@@ -9,10 +9,17 @@ import {
   Line,
   Message,
 } from './styles';
-import { IoChevronDownSharp, IoChevronUpSharp } from 'react-icons/io5';
+import { IoChevronDownSharp } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 
-const SimilarWrapper = ({ children, simiarLimit, moreButton, isContents, isMovie }) => {
+const SimilarWrapper = ({
+  children,
+  simiarLimit,
+  moreButton,
+  isMoreShow,
+  isContents,
+  isMovie,
+}) => {
   const { detailResult } = useSelector((state) => state.contents);
 
   return (
@@ -21,14 +28,16 @@ const SimilarWrapper = ({ children, simiarLimit, moreButton, isContents, isMovie
       {isContents ? (
         <>
           <ContentsWrapper>{children}</ContentsWrapper>
-          <MoreWrapper isMore={simiarLimit === 12}>
-            <div className="button-wrapper">
-              <Line />
-              <MoreButton onClick={moreButton}>
-                {simiarLimit === 12 ? <IoChevronDownSharp /> : <IoChevronUpSharp />}
-              </MoreButton>
-            </div>
-          </MoreWrapper>
+          {isMoreShow && (
+            <MoreWrapper isMore={simiarLimit === 12}>
+              <div className="button-wrapper">
+                <Line />
+                <MoreButton visible={simiarLimit === 12} onClick={moreButton}>
+                  <IoChevronDownSharp className="similar-icon" />
+                </MoreButton>
+              </div>
+            </MoreWrapper>
+          )}
         </>
       ) : (
         <Message>
