@@ -25,6 +25,9 @@ import {
   LOAD_GENRE_REQUEST,
   LOAD_GENRE_SUCCESS,
   LOAD_GENRE_FAILURE,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_FAILURE,
 } from '../type';
 
 const initialState = {
@@ -42,6 +45,7 @@ const initialState = {
   seasonNumber: 1,
   seasonLoading: false,
   genreResults: null,
+  searchResults: null,
   contentsError: null,
 };
 
@@ -154,6 +158,7 @@ const contentsReducer = (state = initialState, action) => {
       };
     case LOAD_SIMILAR_FAILURE:
       return {
+        ...state,
         similarLoading: false,
       };
     case LOAD_SEASON_REQUEST:
@@ -169,6 +174,7 @@ const contentsReducer = (state = initialState, action) => {
       };
     case LOAD_SEASON_FAILURE:
       return {
+        ...state,
         seasonLoading: false,
       };
     case LOAD_GENRE_REQUEST:
@@ -184,6 +190,24 @@ const contentsReducer = (state = initialState, action) => {
       };
     case LOAD_GENRE_FAILURE:
       return {
+        ...state,
+        isLoading: false,
+      };
+    case SEARCH_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case SEARCH_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        searchResults: action.payload,
+      };
+    case SEARCH_FAILURE:
+      return {
+        ...state,
         isLoading: false,
       };
     case GET_RANDOM_REQUEST:

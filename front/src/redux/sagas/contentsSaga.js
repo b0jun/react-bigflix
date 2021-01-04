@@ -1,5 +1,5 @@
 import { call, put, takeEvery, all, fork } from 'redux-saga/effects';
-import { movieApi, tvApi } from '../../lib/api/contentsAPI';
+import { movieApi, multiApi, tvApi } from '../../lib/api/contentsAPI';
 import {
   GET_RANDOM_FAILURE,
   GET_RANDOM_REQUEST,
@@ -25,6 +25,9 @@ import {
   LOAD_TV_FAILURE,
   LOAD_TV_REQUEST,
   LOAD_TV_SUCCESS,
+  SEARCH_FAILURE,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
 } from '../type';
 
 // Home Contents
@@ -310,6 +313,34 @@ function* watchLoadGenre() {
   yield takeEvery(LOAD_GENRE_REQUEST, loadGenre);
 }
 
+// Search Content
+const searchAPI = (term) => {
+  return multiApi.search(term);
+};
+
+function* search(action) {
+  try {
+    const {
+      data: { results },
+    } = yield call(searchAPI, action.data);
+
+    yield put({
+      type: SEARCH_SUCCESS,
+      payload: results,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: SEARCH_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchSearch() {
+  yield takeEvery(SEARCH_REQUEST, search);
+}
+
 // Random TopSection
 function* getRandom() {
   try {
@@ -352,6 +383,7 @@ export default function* contentsSaga() {
     fork(watchLoadSimilar),
     fork(watchLoadSeason),
     fork(watchLoadGenre),
+    fork(watchSearch),
     fork(watchGetRandom),
   ]);
 }
