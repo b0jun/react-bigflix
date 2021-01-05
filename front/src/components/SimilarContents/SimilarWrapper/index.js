@@ -32,7 +32,7 @@ const SimilarWrapper = ({
             <MoreWrapper isMore={simiarLimit === 12}>
               <div className="button-wrapper">
                 <Line />
-                <MoreButton visible={simiarLimit === 12} onClick={moreButton}>
+                <MoreButton visible={simiarLimit !== 12} onClick={moreButton}>
                   <IoChevronDownSharp className="similar-icon" />
                 </MoreButton>
               </div>

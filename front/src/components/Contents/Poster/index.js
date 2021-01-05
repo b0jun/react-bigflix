@@ -40,7 +40,7 @@ const Poster = ({
       <PosterBlock
         rating={rating}
         className="poster_wrapper"
-        isSlider={pathname.indexOf('genre') === -1}
+        isSlider={pathname.indexOf('genre') === -1 && pathname.indexOf('search') === -1}
       >
         <img
           className="poster_img"
@@ -88,7 +88,7 @@ Poster.propTypes = {
   id: PropTypes.number.isRequired,
   imgUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
+  year: PropTypes.string,
   rating: PropTypes.number.isRequired,
   genres: PropTypes.array.isRequired,
   isMovie: PropTypes.bool.isRequired,
