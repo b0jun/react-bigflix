@@ -185,7 +185,7 @@ const PosterBlock = styled.div`
             z-index: 2;
             ${DetailWrapper} {
               opacity: 1;
-              animation: ${fadeIn} 300ms ease-in-out;
+              animation: ${fadeIn} 400ms ease-in-out;
             }
           }
         `
@@ -248,7 +248,7 @@ const PosterBlock = styled.div`
             z-index: 2;
             ${DetailWrapper} {
               opacity: 1;
-              animation: ${fadeIn} 300ms ease-in-out;
+              animation: ${fadeIn} 400ms ease-in-out;
             }
           }
         `}
@@ -260,4 +260,14 @@ const ButtonWrapper = styled.div`
   justify-content: space-around;
 `;
 
-export { PosterBlock, DetailWrapper, ButtonWrapper };
+const EmptySpace = styled.div`
+  margin-top: 1rem;
+  height: 3rem;
+  @media screen and (max-width: ${(props) => props.theme.responsive.wide}) {
+    height: 2.5rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.responsive.medium}) {
+    height: 2rem;
+  }
+`;
+export { PosterBlock, DetailWrapper, ButtonWrapper, EmptySpace };

@@ -81,6 +81,8 @@ const DetailModal = ({ id, isMovie, onClose }) => {
                     ? `https://image.tmdb.org/t/p/original${detailResult.backdrop_path}`
                     : noBackdrop
                 }
+                id={id}
+                isMovie={isMovie}
               />
               <div className="contents-wrapper">
                 <DetailInfo
