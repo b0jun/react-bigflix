@@ -7,7 +7,7 @@ const Block = styled.div`
   justify-content: center;
 `;
 const TextWrapper = styled.div`
-  padding-top: 10rem;
+  padding: 10rem 1rem 0;
   font-size: 0.8rem;
 `;
 const MsgWrapper = ({ children }) => {

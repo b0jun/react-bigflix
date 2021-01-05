@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Result = styled.p`
-  line-height: 4rem;
   font-size: 1rem;
+  margin-bottom: 2rem;
   span {
     font-weight: bold;
     font-size: 1.2rem;
