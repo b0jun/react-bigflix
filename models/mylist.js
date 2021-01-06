@@ -5,9 +5,6 @@ const MylistSchema = new Schema(
     contentId: {
       type: String,
     },
-    contentInfo: {
-      type: Array,
-    },
     isMovie: {
       type: Boolean,
     },
@@ -19,6 +16,6 @@ const MylistSchema = new Schema(
   { timestamps: true }
 );
 
-const Mylist = mongoose.model('user', MylistSchema);
+const Mylist = mongoose.model('mylist', MylistSchema);
 
 export default Mylist;

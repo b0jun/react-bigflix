@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DetailWrapper, PosterBlock, ButtonWrapper } from './styles';
+import { DetailWrapper, PosterBlock, ButtonWrapper, EmptySpace } from './styles';
 import Rating from '../Rating';
 import { GenresData } from '../../../lib/util/GenresData';
 import { IoPlay } from 'react-icons/io5';
 import { FaChevronDown } from 'react-icons/fa';
-import { GoPlus } from 'react-icons/go';
 import ModalPortal from '../../../lib/ModalPortal';
 import DetailModal from '../../Detail/DetailModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +12,7 @@ import { CLEAR_DETAIL } from '../../../redux/type';
 import CircleButton from '../../Common/CircleButton';
 import noPoster from '../../../static/images/noPoster.png';
 import { withRouter } from 'react-router-dom';
+import ListCheck from '../../ListCheck';
 
 const Poster = ({
   id,
@@ -26,6 +26,7 @@ const Poster = ({
 }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const [visible, setVisble] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const dispatch = useDispatch();
 
   const onOpenModal = () => {
@@ -35,12 +36,25 @@ const Poster = ({
     setVisble(false);
     dispatch({ type: CLEAR_DETAIL }); // 모달 닫으면 콘텐츠 지우기
   }, [dispatch]);
+
+  const onEnterHover = () => {
+    setIsHovering(true);
+  };
+  const onLeaveHover = () => {
+    setIsHovering(false);
+  };
   return (
     <>
       <PosterBlock
         rating={rating}
         className="poster_wrapper"
-        isSlider={pathname.indexOf('genre') === -1 && pathname.indexOf('search') === -1}
+        isSlider={
+          pathname.indexOf('genre') === -1 &&
+          pathname.indexOf('search') === -1 &&
+          pathname.indexOf('mylist') === -1
+        }
+        onMouseEnter={onEnterHover}
+        onMouseLeave={onLeaveHover}
       >
         <img
           className="poster_img"
@@ -60,19 +74,19 @@ const Poster = ({
                   : `${GenresData[genre]} • `
               )}
           </div>
-          <ButtonWrapper>
-            <CircleButton>
-              <IoPlay />
-            </CircleButton>
-            {userInfo && (
+          {isHovering ? (
+            <ButtonWrapper>
               <CircleButton>
-                <GoPlus />
+                <IoPlay />
               </CircleButton>
-            )}
-            <CircleButton onClick={onOpenModal}>
-              <FaChevronDown />
-            </CircleButton>
-          </ButtonWrapper>
+              {userInfo && <ListCheck contentId={id} isMovie={isMovie} />}
+              <CircleButton onClick={onOpenModal}>
+                <FaChevronDown />
+              </CircleButton>
+            </ButtonWrapper>
+          ) : (
+            <EmptySpace />
+          )}
         </DetailWrapper>
       </PosterBlock>
       {visible && (

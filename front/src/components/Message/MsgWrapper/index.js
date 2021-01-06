@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Block = styled.div`
   height: 100vh;
@@ -16,6 +17,10 @@ const MsgWrapper = ({ children }) => {
       <TextWrapper>{children}</TextWrapper>
     </Block>
   );
+};
+
+MsgWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default MsgWrapper;
