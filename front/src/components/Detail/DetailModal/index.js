@@ -60,7 +60,6 @@ const DetailModal = ({ id, isMovie, onClose }) => {
     },
     [onClose]
   );
-  console.log(detailResult);
   return (
     <ModalStyle onClick={onExternalClick}>
       <DetailModalBlock>

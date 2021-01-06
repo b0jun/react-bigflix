@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MsgWrapper from '../MsgWrapper';
 import { Result, TipTitle, Tip } from './styles';
 
@@ -19,6 +20,10 @@ const SearchMessage = ({ searchValue }) => {
       </Tip>
     </MsgWrapper>
   );
+};
+
+SearchMessage.propTypes = {
+  searchValue: PropTypes.string.isRequired,
 };
 
 export default SearchMessage;

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GoPlus } from 'react-icons/go';
 import { IoPlay } from 'react-icons/io5';
 import { FlexWrapper } from '../../Common/GlobalStyles';
 import SquareButton from '../../Common/SquareButton';

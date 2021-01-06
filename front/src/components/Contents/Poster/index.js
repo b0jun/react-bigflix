@@ -48,7 +48,11 @@ const Poster = ({
       <PosterBlock
         rating={rating}
         className="poster_wrapper"
-        isSlider={pathname.indexOf('genre') === -1 && pathname.indexOf('search') === -1}
+        isSlider={
+          pathname.indexOf('genre') === -1 &&
+          pathname.indexOf('search') === -1 &&
+          pathname.indexOf('mylist') === -1
+        }
         onMouseEnter={onEnterHover}
         onMouseLeave={onLeaveHover}
       >

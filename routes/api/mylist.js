@@ -65,4 +65,19 @@ router.post('/remove', async (req, res, next) => {
     next(err);
   }
 });
+
+router.post('/lists', async (req, res, next) => {
+  const { userInfo } = req.body;
+  try {
+    const mylist = await Mylist.find({ userInfo }, { userInfo: 0 });
+    if (!mylist) {
+      return res.status(400).send('내가 찜한 콘텐츠가 없습니다.');
+    }
+    res.status(200).json({ mylist });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
 export default router;

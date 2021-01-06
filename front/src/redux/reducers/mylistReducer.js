@@ -5,6 +5,9 @@ import {
   CHECK_MYLIST_FAILURE,
   CHECK_MYLIST_REQUEST,
   CHECK_MYLIST_SUCCESS,
+  LOAD_MYLIST_FAILURE,
+  LOAD_MYLIST_REQUEST,
+  LOAD_MYLIST_SUCCESS,
   REMOVE_MYLIST_FAILURE,
   REMOVE_MYLIST_REQUEST,
   REMOVE_MYLIST_SUCCESS,
@@ -13,6 +16,8 @@ import {
 const initialState = {
   isLoading: false,
   saved: false,
+  mylistLoading: false,
+  mylistResults: null,
 };
 
 export const checkMylist = (data) => ({
@@ -79,6 +84,22 @@ const mylistReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      };
+    case LOAD_MYLIST_REQUEST:
+      return {
+        ...state,
+        mylistLoading: true,
+      };
+    case LOAD_MYLIST_SUCCESS:
+      return {
+        ...state,
+        mylistLoading: false,
+        mylistResults: action.payload,
+      };
+    case LOAD_MYLIST_FAILURE:
+      return {
+        ...state,
+        mylistLoading: false,
       };
     default:
       return state;

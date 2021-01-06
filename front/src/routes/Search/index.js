@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Spinner from '../../components/Common/Spinner';
 import Poster from '../../components/Contents/Poster';
 import Wrapper from '../../components/Contents/Wrapper';
@@ -78,6 +79,14 @@ const SearchRoute = ({
       )}
     </>
   );
+};
+
+SearchRoute.propTypes = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+    }),
+  }),
 };
 
 export default withRouter(SearchRoute);
