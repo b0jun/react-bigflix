@@ -13,6 +13,7 @@ export const movieApi = {
   movieTrendingDay: () => Tmdb.get('trending/movie/day'),
   movieTrendingWeek: () => Tmdb.get('trending/movie/week'),
   getGenre: () => Tmdb.get('genre/movie/list'),
+  getVideo: (id) => Tmdb.get(`/movie/${id}/videos`),
   movieDiscover: (genre, page) =>
     Tmdb.get(`discover/movie`, {
       params: {
@@ -36,6 +37,7 @@ export const tvApi = {
   tvTrendingDay: () => Tmdb.get('trending/tv/day'),
   tvTrendingWeek: () => Tmdb.get('trending/tv/week'),
   getGenre: () => Tmdb.get('genre/tv/list'),
+  getVideo: (id) => Tmdb.get(`/movie/${id}/videos`),
   tvDiscover: (genre, page) =>
     Tmdb.get(`discover/tv`, {
       params: {
@@ -43,6 +45,7 @@ export const tvApi = {
         page: page,
       },
     }),
+
   tvSeasons: (id, season_number) => Tmdb.get(`tv/${id}/season/${season_number}`),
 };
 

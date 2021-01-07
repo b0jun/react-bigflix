@@ -82,6 +82,11 @@ const DetailModal = ({ id, isMovie, onClose }) => {
                 }
                 id={id}
                 isMovie={isMovie}
+                video={
+                  detailResult.videos.results.length > 0
+                    ? detailResult.videos.results[0].key
+                    : ''
+                }
               />
               <div className="contents-wrapper">
                 <DetailInfo

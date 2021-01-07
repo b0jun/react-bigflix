@@ -13,6 +13,7 @@ import CircleButton from '../../Common/CircleButton';
 import noPoster from '../../../static/images/noPoster.png';
 import { withRouter } from 'react-router-dom';
 import ListCheck from '../../ListCheck';
+import { movieApi, tvApi } from '../../../lib/api/contentsAPI';
 
 const Poster = ({
   id,
@@ -23,6 +24,7 @@ const Poster = ({
   genres,
   isMovie,
   location: { pathname },
+  history,
 }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const [visible, setVisble] = useState(false);
@@ -43,6 +45,29 @@ const Poster = ({
   const onLeaveHover = () => {
     setIsHovering(false);
   };
+
+  const onVideo = async () => {
+    if (isMovie) {
+      const {
+        data: { results },
+      } = await movieApi.getVideo(id);
+      if (results.length === 0) {
+        alert('본 컨텐츠에 제공될 영상이 없습니다.');
+        return;
+      }
+      history.push(`/player/${results[0].key}`);
+    } else {
+      const {
+        data: { results },
+      } = await tvApi.getVideo(id);
+      if (results.length === 0) {
+        alert('본 컨텐츠에 제공될 영상이 없습니다.');
+        return;
+      }
+      history.push(`/player/${results[0].key}`);
+    }
+  };
+
   return (
     <>
       <PosterBlock
@@ -77,7 +102,7 @@ const Poster = ({
           {isHovering ? (
             <ButtonWrapper>
               <CircleButton>
-                <IoPlay />
+                <IoPlay onClick={onVideo} />
               </CircleButton>
               {userInfo && <ListCheck contentId={id} isMovie={isMovie} />}
               <CircleButton onClick={onOpenModal}>
@@ -106,6 +131,10 @@ Poster.propTypes = {
   rating: PropTypes.number.isRequired,
   genres: PropTypes.array.isRequired,
   isMovie: PropTypes.bool.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }),
+  history: PropTypes.object.isRequired,
 };
 
 export default withRouter(Poster);

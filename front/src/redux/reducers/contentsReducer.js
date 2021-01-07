@@ -199,7 +199,6 @@ const contentsReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case SEARCH_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isLoading: false,

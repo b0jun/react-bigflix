@@ -10,8 +10,10 @@ import ModalPortal from '../../../lib/ModalPortal';
 import DetailModal from '../../Detail/DetailModal';
 import { useDispatch } from 'react-redux';
 import { CLEAR_DETAIL } from '../../../redux/type';
+import { movieApi, tvApi } from '../../../lib/api/contentsAPI';
+import { withRouter } from 'react-router-dom';
 
-const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
+const TopSection = ({ id, imgUrl, title, overview, isMovie, history }) => {
   const [visible, setVisble] = useState(false);
   const dispatch = useDispatch();
 
@@ -24,6 +26,28 @@ const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
     dispatch({ type: CLEAR_DETAIL }); // 모달 닫으면 콘텐츠 지우기
   }, [dispatch]);
 
+  const onVideo = async () => {
+    if (isMovie) {
+      const {
+        data: { results },
+      } = await movieApi.getVideo(id);
+      if (results.length === 0) {
+        alert('본 컨텐츠에 제공될 영상이 없습니다.');
+        return;
+      }
+      history.push(`/player/${results[0].key}`);
+    } else {
+      const {
+        data: { results },
+      } = await tvApi.getVideo(id);
+      if (results.length === 0) {
+        alert('본 컨텐츠에 제공될 영상이 없습니다.');
+        return;
+      }
+      history.push(`/player/${results[0].key}`);
+    }
+  };
+
   return (
     <>
       <TopSectionBlock>
@@ -34,7 +58,7 @@ const TopSection = ({ id, imgUrl, title, overview, isMovie }) => {
             &nbsp;{overview.length > 250 ? `${overview.substring(0, 250)}...` : overview}
           </div>
           <FlexWrapper>
-            <SquareButton marginR>
+            <SquareButton marginR onClick={onVideo}>
               <IoPlay />
               <p>&nbsp;재생</p>
             </SquareButton>
@@ -60,6 +84,7 @@ TopSection.propTypes = {
   title: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
   isMovie: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-export default TopSection;
+export default withRouter(TopSection);
