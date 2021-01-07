@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -8,17 +8,25 @@ import Wrapper from '../../components/Contents/Wrapper';
 import SearchMessage from '../../components/Message/SearchMessage';
 
 const SearchRoute = ({
+  history,
   history: {
     location: { search },
   },
 }) => {
   const { searchResults, isLoading } = useSelector((state) => state.contents);
+
+  useEffect(() => {
+    if (!isLoading && !searchResults) {
+      history.push('/');
+    }
+  }, [history, searchResults, isLoading]);
   return (
     <>
       <Wrapper>
-        {isLoading || !searchResults ? (
+        {isLoading ? (
           <Spinner />
         ) : (
+          searchResults &&
           searchResults.map((content) =>
             content.media_type === 'person' ? (
               content.known_for.map((content) =>

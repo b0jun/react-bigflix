@@ -9,7 +9,6 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/api/auth';
 import mylistRoutes from './routes/api/mylist';
 import config from './config';
-import isLoggenIn from './middleware/isLoggedIn';
 
 const app = express();
 const { PORT, MONGO_URI } = config;

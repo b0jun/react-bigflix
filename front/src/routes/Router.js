@@ -6,6 +6,7 @@ import GenreRoute from './Genre';
 import HomeRoute from './Home';
 import MovieRoute from './Movie';
 import MylistRoute from './Mylist';
+import PlayerRoute from './Player';
 import SearchRoute from './Search';
 import TVRoute from './TV';
 
@@ -20,6 +21,7 @@ const RootRouter = () => (
       <Route path="/tv/genre/:id" component={GenreRoute} />
       <Route path="/search" component={SearchRoute} />
       <Route path="/mylist" component={MylistRoute} />
+      <Route path="/player/:id" component={PlayerRoute} />
       <Redirect from="*" to="/" />
     </Switch>
     <Footer />
