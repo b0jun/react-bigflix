@@ -12,14 +12,20 @@ import config from './config';
 
 const app = express();
 const { PORT, MONGO_URI } = config;
+const prod = process.env.NODE_ENV === 'production';
 
-app.use(hpp());
-app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: true, credentials: true }));
-app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+if (prod) {
+  app.use(morgan('combined'));
+  app.use(hpp());
+  app.use(helmet({ contentSecurityPolicy: false }));
+} else {
+  app.use(morgan('dev'));
+}
 
 mongoose
   .connect(MONGO_URI, {
@@ -31,12 +37,16 @@ mongoose
   .then(() => console.log('MongoDB connection Success'))
   .catch((e) => console.log(e));
 
-app.get('/', (req, res) => {
-  res.send('Success');
-});
-
 app.use('/api/auth', authRoutes);
 app.use('/api/mylist', mylistRoutes);
+
+if (prod) {
+  app.use(express.static(path.json(__dirname, './front/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './front/build', 'index.html'));
+  });
+}
+
 const port = PORT || 4000;
 app.listen(port, () => {
   console.log('Listening to port: %d', port);
