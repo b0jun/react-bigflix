@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js --exec babel-node",
-    "start": "pm2 start app.js --exec babel-node"
+    "start": "pm2 start --interpreter babel-node app.js"
   },
   "license": "MIT",
   "dependencies": {
