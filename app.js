@@ -5,10 +5,12 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-
+import path from 'path';
 import authRoutes from './routes/api/auth';
 import mylistRoutes from './routes/api/mylist';
 import config from './config';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const { PORT, MONGO_URI } = config;
@@ -41,7 +43,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/mylist', mylistRoutes);
 
 if (prod) {
-  app.use(express.static(path.json(__dirname, './front/build')));
+  app.use(express.static(path.join(__dirname, './front/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './front/build', 'index.html'));
   });
