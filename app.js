@@ -9,8 +9,6 @@ import path from 'path';
 import authRoutes from './routes/api/auth';
 import mylistRoutes from './routes/api/mylist';
 import config from './config';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const app = express();
 const { PORT, MONGO_URI } = config;
